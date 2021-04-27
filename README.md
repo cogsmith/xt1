@@ -1,3 +1,3 @@
-# npm install @cogsmith/xtjs
+# npm install @cogsmith/xt
 
-## https://www.npmjs.com/package/@cogsmith/xtjs
+## https://www.npmjs.com/package/@cogsmith/xt
