@@ -107,11 +107,11 @@ XT.Init = function () {
 
     XT.InitProcess();
 
-    LOG.TRACE('XT.InitDone');
+    //LOG.TRACE('XT.InitDone');
 }
 
 XT.InitProcess = function () {
-    LOG.TRACE('XT.InitProcess');
+    //LOG.TRACE('XT.InitProcess');
 
     process.setMaxListeners(999); require('events').EventEmitter.prototype._maxListeners = 999;
     process.on('uncaughtException', function (err) { console.log("\n"); console.log(err); console.log("\n"); process.exit(1); }); // throw(Error('ERROR'));
@@ -138,16 +138,36 @@ App.Package = AppPackage;
 App.Meta = AppMeta;
 
 App.InfoDB = {};
-App.Info = function (id) { let z = App.InfoDB[id]; if (!z) { return z; } else { return z.Type == 'FX' ? z.Value() : z.Value; } };
+
+App.Info = function (id) {
+    let z = App.InfoDB[id];
+    let info = false;
+    if (!z) { info = z; }
+    else {
+        if (z.Type == 'FX') { info = z.Value.call(); }
+        else { info = z.Value; }
+    }
+    return info;
+};
+
 App.SetInfo = function (id, value) { if (typeof (value) == 'function') { return App.InfoDB[id] = { Type: 'FX', Value: value } } else { return App.InfoDB[id] = { Type: 'VALUE', Value: value } } };
 App.SetInfo('Node.Args', process.argv.join(' '));
 App.SetInfo('Node', require('os').hostname().toUpperCase() + ' : ' + process.pid + '/' + process.ppid + ' : ' + process.cwd() + ' : ' + process.version + ' : ' + require('os').version() + ' : ' + process.title);
 App.SetInfo('App', App.Meta.Full);
 
 App.Run = function () {
+    if (App.InitArgs) {
+        //LOG.TRACE('App.InitArgs');
+        App.InitArgs();
+    }
+
+    if (App.InitInfo) {
+        //LOG.TRACE('App.InitInfo');
+        App.InitInfo();
+    }
+
     App.Args = YARGS;
-    if (App.InitArgs) { App.InitArgs(); }
-    if (App.Argy) { App.Args.argv; }
+    if (App.Argy) { App.Args = App.Argy.argv; }
     if (App.Args.debuglogger) { LOG.TRACE('TRACE'); LOG.DEBUG('DEBUG'); LOG.INFO('INFO'); LOG.WARN('WARN'); LOG.ERROR('ERROR'); App.Exit({ silent: true }); }
     if (App.Args.debugargs) { console.log("\n"); console.log(App.Args); console.log("\n"); App.Exit({ silent: true }); };
     if (App.Args.help) { App.Argy.showHelp('log'); console.log("\n" + App.Info('Node') + "\n"); App.Exit({ silent: true }); }
@@ -163,11 +183,6 @@ App.Run = function () {
 
     LOG.DEBUG('App.Run');
 
-    if (App.Init) {
-        LOG.TRACE('App.Init');
-        App.Init();
-    }
-
     if (App.InitData) {
         LOG.TRACE('App.InitData');
         App.InitData();
@@ -176,6 +191,11 @@ App.Run = function () {
     if (App.InitBackend) {
         LOG.TRACE('App.InitBackend');
         App.InitBackend();
+    }
+
+    if (App.Init) {
+        LOG.TRACE('App.Init');
+        App.Init();
     }
 
     if (App.InitDone) {

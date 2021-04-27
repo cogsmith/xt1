@@ -1,9 +1,10 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.8",
     "name": "@cogsmith/xt",
     "nametag": "XT",
     "namelong": "XTNODE",
     "description": "NodeJS Application Framework",
+    "license": "GPLv3",
     "dependencies": {
         "chalk": "^4.1.1",
         "lodash": "^4.17.21",
