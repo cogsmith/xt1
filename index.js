@@ -16,8 +16,7 @@ const NOP = function () { };
 let LOG = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP;
 
 // const LOGCONSOLE = function () { console.log(arguments); };
-const LOGCONSOLE = console.log;
-LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE;
+const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE;
 
 //
 
@@ -48,7 +47,7 @@ const AppPackage = require(process.cwd() + '/' + 'package.json');
 const AppMeta = _.merge(AppPackage, {
     Version: AppPackage.version || process.env.npm_package_version || '0.0.0',
     Name: AppPackage.namelong || AppPackage.name || 'App',
-    NameTag: AppPackage.nametag || AppPackage.name.toUpperCase(),
+    NameTag: AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'App',
     Info: AppPackage.description || ''
 });
 AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
