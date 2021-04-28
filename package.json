@@ -1,15 +1,16 @@
 {
-    "version": "0.0.9",
-    "name": "@cogsmith/xt",
-    "nametag": "XT",
-    "namelong": "XTNODE",
-    "description": "NodeJS Application Framework",
-    "license": "GPLv3",
-    "dependencies": {
-        "chalk": "^4.1.1",
-        "lodash": "^4.17.21",
-        "pino": "^6.11.3",
-        "pino-pretty": "^4.7.1",
-        "yargs": "^16.2.0"
-    }
+  "version": "0.0.9",
+  "name": "@cogsmith/xt",
+  "nametag": "XT",
+  "namelong": "XTNODE",
+  "description": "NodeJS Application Framework",
+  "license": "GPLv3",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "lodash": "^4.17.21",
+    "pino": "^6.11.3",
+    "pino-pretty": "^4.7.1",
+    "yargs": "^16.2.0"
+  },
+  "versiontaglast": "0.0.9"
 }
