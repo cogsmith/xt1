@@ -20,7 +20,7 @@ const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; 
 
 //
 
-const YARG = yargs(process.argv).help(false).version(false);
+const YARG = yargs(process.argv).help(false).version(false).group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'info');
 const YARGS = YARG.argv;
 
 //
