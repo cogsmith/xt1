@@ -12,5 +12,5 @@
     "pino-pretty": "^4.7.1",
     "yargs": "^16.2.0"
   },
-  "versiontaglast": "1.0.1"
+  "versiontaglast": "1.0.2"
 }
