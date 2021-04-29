@@ -14,6 +14,6 @@ jobs:
         with:
           fetch-depth: 0
       - uses: cogsmith/devking-release@main
+      - run: npm publish
         env:
-          XTXT: 9999
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
