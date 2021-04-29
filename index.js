@@ -80,7 +80,7 @@ XT.GetLogger = function () {
         translateTime: 'SYS:yyyy-mm-dd|HH:MM:ss',
         messageFormat: function (log, key, label) {
             let msg = log.msg ? log.msg : '';
-            let logout = chalk.hex('#999999')(App.Meta.NameTag);
+            let logout = chalk.gray(App.Meta.NameTag);
             if (msg != '') { logout += ' ' + msg };
             return logout;
         }
@@ -243,7 +243,7 @@ App.InitBackend = function () {
             LOG.TRACE('App.InitBackend:Done');
             //if (App.Args.loglevel == 'trace') { console.log(App.Backend.printRoutes()); }
             //console.log(App.Routes);
-            //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.hex('#808080')(z)) });
+            //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.gray(z)) });
 
         }
     });
@@ -274,7 +274,7 @@ App.Run = function () {
     //LOG.TRACE({ App: App });
     LOG.TRACE('Node.Info: ' + chalk.white(App.Info('Node')));
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
-    LOG.TRACE('XT.Meta: ' + chalk.hex('#707070')(XT.Meta.Full));
+    LOG.TRACE('XT.Meta: ' + chalk.gray(XT.Meta.Full));
     LOG.INFO('App.Meta: ' + chalk.white(App.Meta.Full));
     let appinfo = App.Info('App'); if (appinfo != App.Meta.Full) { LOG.INFO('App.Info: ' + chalk.white(App.Info('App'))); }
 
