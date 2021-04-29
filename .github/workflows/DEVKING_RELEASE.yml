@@ -14,3 +14,5 @@ jobs:
         with:
           fetch-depth: 0
       - uses: cogsmith/devking-release@main
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
