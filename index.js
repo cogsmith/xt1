@@ -295,7 +295,7 @@ App.Run = function () {
             LOG.TRACE('App.InitBackend');
             App.InitBackend();
         }
-        else {
+        else if (App.Routes) {
             LOG.TRACE('App.InitBackendFastify');
             App.InitBackendFastify();
         }
