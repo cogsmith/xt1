@@ -1,5 +1,18 @@
 <code>
 
+# [1.0.12](https://github.com/cogsmith/xt/compare/1.0.12...main) @ [2021-04-29](https://github.com/cogsmith/xt/releases/tag/1.0.12) 
+
+## DIFF
+- [2 COMMITS SINCE LAST TAG = 1.0.11](https://github.com/cogsmith/xt/compare/1.0.11...1.0.12)
+
+## COMMIT
+- Merge branch 'main' of https://github.com/cogsmith/xt
+
+</code>
+
+---
+<code>
+
 # [1.0.11](https://github.com/cogsmith/xt/compare/1.0.11...main) @ [2021-04-29](https://github.com/cogsmith/xt/releases/tag/1.0.11) 
 
 ## DIFF
