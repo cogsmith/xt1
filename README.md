@@ -32,10 +32,65 @@
 
 ---
 
-    const XT = require('@cogsmith/xt');
+# Minimal Example
+
+    const XT = require('@cogsmith/xt').Init();
     const LOG = XT.Log;
     const App = XT.App;
-    XT.Init();
+    App.Run();
+
+---
+
+# Simple Example
+
+    const XT = require('@cogsmith/xt').Init();
+    const LOG = XT.Log;
+    const App = XT.App;
+
+    App.InitInfo = function () { App.SetInfo('App','EXAMPLE_SIMPLE'); }
+
+    App.Routes = { '/random': (req,rep) => { rep.send(Math.random(); } };
+
+    App.Run();
+
+---
+
+# Full Example
+
+    const XT = require('@cogsmith/xt').Init();
+    const LOG = XT.Log;
+    const App = XT.App;
+
+    App.InitArgs = function () { 
+        App.Argy = yargs(process.argv); 
+    }
+
+    App.InitInfo = function () { 
+        App.SetInfo('App',function () { return 'CUSTOMINFO' });
+    }
+
+    App.InitData = function () { 
+        App.MyDB = { FOO:123, BAR:Math.random() };
+    }
+
+    App.Init = function () {
+    }
+
+    App.InitDone = function () {
+
+    }
+
+    App.Main = function () {
+
+    }
+
+    App.Routes = {
+        '/foo': (req,rep) => {
+            let data = { action:'FOO', rand:Math.random() };
+            rep.view('template',data);
+        }
+    }
+
     App.Run();
 
 ---
