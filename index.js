@@ -202,38 +202,40 @@ App.InitBackend = function () {
 
     // backend.get('/', function (req, rep) { rep.send('XT'); });
 
-    let routekeys = Object.keys(App.Routes).sort();
-    for (let i = 0; i < routekeys.length; i++) {
-        let rkey = routekeys[i];
-        let rfx = App.Routes[rkey];
-        if (rkey.startsWith('/') || rkey.startsWith('*')) {
-            LOG.TRACE('Backend.Route: ' + rkey);
-            backend.route({ method: backend_methods, url: rkey, handler: rfx });
-        }
-        else {
-            if (rkey == 'ELSE' && rfx) {
-                if (!App.Routes['*']) {
-                    LOG.TRACE('Backend.Route: ' + rkey);
-                    backend.route({ method: backend_methods, url: '*', handler: rfx });
+    if (App.Routes) {
+        let routekeys = Object.keys(App.Routes).sort();
+        for (let i = 0; i < routekeys.length; i++) {
+            let rkey = routekeys[i];
+            let rfx = App.Routes[rkey];
+            if (rkey.startsWith('/') || rkey.startsWith('*')) {
+                LOG.TRACE('Backend.Route: ' + rkey);
+                backend.route({ method: backend_methods, url: rkey, handler: rfx });
+            }
+            else {
+                if (rkey == 'ELSE' && rfx) {
+                    if (!App.Routes['*']) {
+                        LOG.TRACE('Backend.Route: ' + rkey);
+                        backend.route({ method: backend_methods, url: '*', handler: rfx });
+                    }
                 }
             }
         }
+
+        if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
+            LOG.TRACE('Backend.Route: ELSEROOT');
+            let rfx = (req, rep) => {
+                if (req.url != '/') { rep.redirect('/'); }
+                else { rep.code(404).send(); }
+            };
+            backend.route({ method: backend_methods, url: '*', handler: rfx });
+        }
+
+        //if (App.Routes['*']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
+        //else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
+
+        if (App.Routes['NOTFOUND']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
+        else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
     }
-
-    if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
-        LOG.TRACE('Backend.Route: ELSEROOT');
-        let rfx = (req, rep) => {
-            if (req.url != '/') { rep.redirect('/'); }
-            else { rep.code(404).send(); }
-        };
-        backend.route({ method: backend_methods, url: '*', handler: rfx });
-    }
-
-    //if (App.Routes['*']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
-    //else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
-
-    if (App.Routes['NOTFOUND']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
-    else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
 
     if (!App.IP) { App.IP = YARGS.ip; }
     if (!App.Port) { App.Port = YARGS.port; }
@@ -286,7 +288,8 @@ App.Run = function () {
     }
 
     // if (!App.Routes) { delete App.InitBackend; }
-    if (!App.Backend && App.Routes && App.InitBackend) {
+    //if (!App.Backend && App.Routes && App.InitBackend) {
+    if (!App.Backend && App.InitBackend) {
         LOG.TRACE('App.InitBackend');
         App.InitBackend();
     }
