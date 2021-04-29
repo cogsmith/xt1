@@ -39,7 +39,7 @@ XT.InitMeta = function () {
     XT.Package = require('./package.json');
     XT.Meta = _.merge(XT.Package, {
         Version: XT.Package.version || process.env.npm_package_version || '0.0.0',
-        Name: XT.Package.namelong || XT.Package.name || 'App',
+        Name: XT.Package.namelong || XT.Package.name || 'XT',
         NameTag: XT.Package.nametag || XT.Package.name.toUpperCase(),
         Info: XT.Package.description || ''
     });
@@ -48,8 +48,8 @@ XT.InitMeta = function () {
     const AppPackage = require(process.cwd() + '/' + 'package.json');
     const AppMeta = _.merge(AppPackage, {
         Version: AppPackage.version || process.env.npm_package_version || '0.0.0',
-        Name: AppPackage.namelong || AppPackage.name || 'App',
-        NameTag: AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'App',
+        Name: AppPackage.namelong || AppPackage.name || 'APP',
+        NameTag: AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'APP',
         Info: AppPackage.description || ''
     });
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
