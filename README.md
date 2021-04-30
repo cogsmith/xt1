@@ -66,7 +66,7 @@
     }
 
     App.InitInfo = function () { 
-        App.SetInfo('App',function () { return 'CUSTOMINFO' });
+        App.SetInfo('App',function () { return 'EXAMPLE_FULL' });
     }
 
     App.InitData = function () { 
