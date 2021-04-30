@@ -183,7 +183,7 @@ App.SetInfo = function (id, value) {
 
 //
 
-App.InitBackendFastify = function () {
+App.InitBackendRoutes = function () {
     let backend_methods = 'HEAD GET PUT POST PATCH DELETE OPTIONS'.split(' ');
     backend_methods = 'HEAD GET PUT POST DELETE'.split(' ');
     backend_methods = 'GET POST'.split(' ');
@@ -295,9 +295,9 @@ App.Run = function () {
             LOG.TRACE('App.InitBackend');
             App.InitBackend();
         }
-        else if (App.Routes) {
-            LOG.TRACE('App.InitBackendFastify');
-            App.InitBackendFastify();
+        else if (App.Routes && App.InitBackendRoutes) {
+            LOG.TRACE('App.InitBackendRoutes');
+            App.InitBackendRoutes();
         }
     }
 
