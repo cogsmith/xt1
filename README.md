@@ -74,10 +74,6 @@
         App.MyDB = { FOO:123, BAR:Math.random() };
     }
 
-    App.InitBackend = function () {
-        App.InitBackendRoutes();
-    }
-
     App.Init = function () {
     }
 
