@@ -52,7 +52,7 @@ XT.InitMeta = function () {
     const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
     AppMeta.Name = AppPackage.namelong || AppPackage.name || process.env.CELLTAG || path.basename(AppPath).toUpperCase() || 'APP';
-    AppMeta.NameTag = AppPackage.nametag || AppPackage.Name || 'APP';
+    AppMeta.NameTag = AppPackage.nametag || process.env.CELLTAG || AppPackage.Name || 'APP';
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
     AppMeta.Path = AppPath;
 
@@ -205,19 +205,20 @@ App.InitBackendRoutes = function () {
     // backend.get('/', function (req, rep) { rep.send('XT'); });
 
     if (App.Routes) {
+        let urlbase = ''; if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
         let routekeys = Object.keys(App.Routes).sort();
         for (let i = 0; i < routekeys.length; i++) {
             let rkey = routekeys[i];
             let rfx = App.Routes[rkey];
             if (rkey.startsWith('/') || rkey.startsWith('*')) {
                 LOG.TRACE('Backend.Route: ' + rkey);
-                backend.route({ method: backend_methods, url: rkey, handler: rfx });
+                backend.route({ method: backend_methods, url: urlbase + rkey, handler: rfx });
             }
             else {
                 if (rkey == 'ELSE' && rfx) {
                     if (!App.Routes['*']) {
                         LOG.TRACE('Backend.Route: ' + rkey);
-                        backend.route({ method: backend_methods, url: '*', handler: rfx });
+                        backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
                     }
                 }
             }
@@ -229,7 +230,7 @@ App.InitBackendRoutes = function () {
                 if (req.url != '/') { rep.redirect('/'); }
                 else { rep.code(404).send(); }
             };
-            backend.route({ method: backend_methods, url: '*', handler: rfx });
+            backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
         }
 
         //if (App.Routes['*']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
