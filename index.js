@@ -205,7 +205,9 @@ App.InitBackendRoutes = function () {
     // backend.get('/', function (req, rep) { rep.send('XT'); });
 
     if (App.Routes) {
-        let urlbase = ''; if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
+        let urlbase = '';
+        if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
+        if (App.RoutesBase) { urlbase = App.RoutesBase; }
         let routekeys = Object.keys(App.Routes).sort();
         for (let i = 0; i < routekeys.length; i++) {
             let rkey = routekeys[i];
