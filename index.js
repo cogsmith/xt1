@@ -208,7 +208,7 @@ App.InitBackendRoutes = function () {
 
     if (App.Routes) {
         let urlbase = '';
-        if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
+        if (process.env.CELLBASE && process.env.CELLBASE != '@') { urlbase = '/' + process.env.CELLBASE; }
         if (App.RoutesBase) { urlbase = App.RoutesBase; }
 
         LOG.DEBUG('App.Routes: ' + urlbase);
