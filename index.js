@@ -205,7 +205,7 @@ App.InitBackendRoutes = function () {
     backend.register(require('fastify-compress'));
 
     backend.register(require('fastify-static'), {
-        root: './www',
+        root: process.cwd() + '/www',
         prefix: urlbase
     })
 
