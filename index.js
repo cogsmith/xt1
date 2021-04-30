@@ -191,7 +191,9 @@ App.InitBackendRoutes = function () {
     backend_methods = 'GET POST'.split(' ');
 
     let backend = require('fastify')({
-        logger: XT.Log, maxParamLength: 999, ignoreTrailingSlash: false,
+        logger: XT.Log,
+        maxParamLength: 999,
+        ignoreTrailingSlash: true,
     });
 
     backend.register(require('fastify-compress'));
