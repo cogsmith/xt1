@@ -1,3 +1,4 @@
+const fs = require('fs');
 const util = require('util');
 const wait = util.promisify(setTimeout);
 
@@ -45,7 +46,7 @@ XT.InitMeta = function () {
     });
     XT.Meta.Full = XT.Meta.Name + ': ' + XT.Meta.Info + ' [' + XT.Meta.Version + ']';
 
-    const AppPackage = require(process.cwd() + '/' + 'package.json');
+    const AppPackage = fs.existsSync(__dirname + '/' + 'package.json') ? require(__dirname + '/' + 'package.json') : {};
     const AppMeta = _.merge(AppPackage, {
         Version: AppPackage.version || process.env.npm_package_version || '0.0.0',
         Name: AppPackage.namelong || AppPackage.name || 'APP',
