@@ -208,6 +208,7 @@ App.InitBackendRoutes = function () {
         let urlbase = '';
         if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
         if (App.RoutesBase) { urlbase = App.RoutesBase; }
+
         let routekeys = Object.keys(App.Routes).sort();
         for (let i = 0; i < routekeys.length; i++) {
             let rkey = routekeys[i];
@@ -229,7 +230,7 @@ App.InitBackendRoutes = function () {
         if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
             LOG.TRACE('Backend.Route: ELSEROOT');
             let rfx = (req, rep) => {
-                if (req.url != '/') { rep.redirect('/'); }
+                if (req.url != (urlbase + '/')) { rep.redirect(urlbase + '/'); }
                 else { rep.code(404).send(); }
             };
             backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
