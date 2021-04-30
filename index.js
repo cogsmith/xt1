@@ -211,7 +211,7 @@ App.InitBackendRoutes = function () {
         if (process.env.CELLBASE && process.env.CELLBASE != '@' && process.env.CELLBASE != '/') { urlbase = '/' + process.env.CELLBASE; }
         if (App.RoutesBase) { urlbase = App.RoutesBase; }
 
-        LOG.DEBUG('App.Routes: ' + urlbase);
+        LOG.DEBUG('App.Routes: ' + ((urlbase == '') ? '/' : urlbase));
 
         let routekeys = Object.keys(App.Routes).sort();
         for (let i = 0; i < routekeys.length; i++) {
