@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const util = require('util');
 const wait = util.promisify(setTimeout);
 
@@ -47,12 +48,10 @@ XT.InitMeta = function () {
     XT.Meta.Full = XT.Meta.Name + ': ' + XT.Meta.Info + ' [' + XT.Meta.Version + ']';
 
     const AppPackage = fs.existsSync(__dirname + '/' + 'package.json') ? require(__dirname + '/' + 'package.json') : {};
-    const AppMeta = _.merge(AppPackage, {
-        Version: AppPackage.version || process.env.npm_package_version || '0.0.0',
-        Name: AppPackage.namelong || AppPackage.name || 'APP',
-        NameTag: AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'APP',
-        Info: AppPackage.description || ''
-    });
+    const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
+    AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
+    AppMeta.Name = AppPackage.namelong || AppPackage.name || path.basename(__dirname).toUpperCase();
+    AppMeta.NameTag = AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'APP';
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
 
     App.Package = AppPackage;
