@@ -78,11 +78,9 @@
     }
 
     App.InitDone = function () {
-
     }
 
     App.Main = function () {
-
     }
 
     App.Routes = { ELSEROOT: true };
