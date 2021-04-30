@@ -211,6 +211,8 @@ App.InitBackendRoutes = function () {
         if (process.env.CELLBASE) { urlbase = '/' + process.env.CELLBASE; }
         if (App.RoutesBase) { urlbase = App.RoutesBase; }
 
+        LOG.DEBUG('App.Routes: ' + urlbase);
+
         let routekeys = Object.keys(App.Routes).sort();
         for (let i = 0; i < routekeys.length; i++) {
             let rkey = routekeys[i];
