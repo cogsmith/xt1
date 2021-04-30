@@ -50,7 +50,7 @@ XT.InitMeta = function () {
     const AppPackage = fs.existsSync(process.cwd() + '/' + 'package.json') ? require(process.cwd() + '/' + 'package.json') : {};
     const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
-    AppMeta.Name = AppPackage.namelong || AppPackage.name || path.basename(__dirname).toUpperCase() || 'APP';
+    AppMeta.Name = AppPackage.namelong || AppPackage.name || path.basename(process.cwd()).toUpperCase() || 'APP';
     AppMeta.NameTag = AppPackage.nametag || AppPackage.Name || 'APP';
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
 
