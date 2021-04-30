@@ -1,7 +1,7 @@
 {
   "npmpublish": true,
   "license": "GPLv3",
-  "version": "1.0.19-dev",
+  "version": "1.0.19",
   "name": "@cogsmith/xt",
   "nametag": "XT",
   "namelong": "XTNODE",
@@ -16,5 +16,5 @@
     "pino-pretty": "^4.7.1",
     "yargs": "^16.2.0"
   },
-  "versiontaglast": "1.0.18"
+  "versiontaglast": "1.0.19"
 }
