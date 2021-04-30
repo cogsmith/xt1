@@ -225,7 +225,7 @@ App.InitBackendRoutes = function () {
                 if (rkey == 'ELSE' && rfx) {
                     if (!App.Routes['*']) {
                         LOG.TRACE('Backend.Route: ' + rkey);
-                        backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
+                        backend.route({ method: backend_methods, url: '*', handler: rfx });
                     }
                 }
             }
@@ -234,10 +234,13 @@ App.InitBackendRoutes = function () {
         if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
             LOG.TRACE('Backend.Route: ELSEROOT');
             let rfx = (req, rep) => {
-                if ((urlbase != '') && (req.url != (urlbase))) { rep.redirect(urlbase); }
+                console.log(urlbase);
+                console.log(req.url);
+                let checkurl = '/'; if (urlbase != '') { checkurl = urlbase; }
+                if (req.url != checkurl) { rep.redirect(checkurl); }
                 else { rep.code(404).send(); }
             };
-            backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
+            backend.route({ method: backend_methods, url: '*', handler: rfx });
         }
 
         //if (App.Routes['*']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
