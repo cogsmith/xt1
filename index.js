@@ -188,6 +188,10 @@ App.SetInfo = function (id, value) {
 //
 
 App.InitBackendRoutes = function () {
+    let urlbase = '';
+    if (process.env.CELLBASE && process.env.CELLBASE != '@' && process.env.CELLBASE != '/') { urlbase = '/' + process.env.CELLBASE; }
+    if (App.RoutesBase) { urlbase = App.RoutesBase; }
+
     let backend_methods = 'HEAD GET PUT POST PATCH DELETE OPTIONS'.split(' ');
     backend_methods = 'HEAD GET PUT POST DELETE'.split(' ');
     backend_methods = 'GET POST'.split(' ');
@@ -200,6 +204,11 @@ App.InitBackendRoutes = function () {
 
     backend.register(require('fastify-compress'));
 
+    backend.register(require('fastify-static'), {
+        root: './www',
+        prefix: urlbase
+    })
+
     let NJCONFIG = {
         tags: {
             blockStart: '[[',
@@ -209,7 +218,7 @@ App.InitBackendRoutes = function () {
             commentStart: '[#',
             commentEnd: '#]'
         }
-    };
+    }
 
     backend.register(require('point-of-view'), {
         engine: { nunjucks: nunjucks },
@@ -233,10 +242,6 @@ App.InitBackendRoutes = function () {
     // backend.get('/', function (req, rep) { rep.send('XT'); });
 
     if (App.Routes) {
-        let urlbase = '';
-        if (process.env.CELLBASE && process.env.CELLBASE != '@' && process.env.CELLBASE != '/') { urlbase = '/' + process.env.CELLBASE; }
-        if (App.RoutesBase) { urlbase = App.RoutesBase; }
-
         LOG.DEBUG('App.Routes: ' + ((urlbase == '') ? '/' : urlbase));
 
         let routekeys = Object.keys(App.Routes).sort();
