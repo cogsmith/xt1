@@ -74,6 +74,10 @@
         App.MyDB = { FOO:123, BAR:Math.random() };
     }
 
+    App.InitBackend = function () {
+        App.InitBackendRoutes();
+    }
+
     App.Init = function () {
     }
 
@@ -84,6 +88,9 @@
     App.Main = function () {
 
     }
+
+    App.Routes = { ELSEROOT: true };
+    App.Routes['/foo'] = (req,rep) => { rep.send('FOO'); };
 
     App.Routes = {
         '/foo': (req,rep) => {
