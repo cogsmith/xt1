@@ -7,6 +7,7 @@ const _ = require('lodash');
 const pino = require('pino');
 const chalk = require('chalk');
 const yargs = require('yargs/yargs');
+const nunjucks = require('nunjucks');
 
 const fastify = require('fastify');
 const fastify_compress = require('fastify-compress');
@@ -197,6 +198,30 @@ App.InitBackendRoutes = function () {
     });
 
     backend.register(require('fastify-compress'));
+
+    let NJCONFIG = {
+        tags: {
+            blockStart: '[[',
+            blockEnd: ']]',
+            variableStart: '[=',
+            variableEnd: '=]',
+            commentStart: '[#',
+            commentEnd: '#]'
+        }
+    };
+
+    backend.register(require('point-of-view'), {
+        engine: { nunjucks: nunjucks },
+        options: {
+            onConfigure: nj => {
+                console.log(nj.opts);
+                nj.opts.tags = NJCONFIG.tags;
+            }
+        },
+        templates: './views',
+        viewExt: 'html',
+        includeViewExtension: true
+    })
 
     backend.addHook('onRequest', (req, rep, nxt) => {
         let reqip = req.socket.remoteAddress;
