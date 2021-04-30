@@ -234,7 +234,7 @@ App.InitBackendRoutes = function () {
         if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
             LOG.TRACE('Backend.Route: ELSEROOT');
             let rfx = (req, rep) => {
-                if (req.url != (urlbase + '/')) { rep.redirect(urlbase + '/'); }
+                if ((urlbase != '') && (req.url != (urlbase))) { rep.redirect(urlbase); }
                 else { rep.code(404).send(); }
             };
             backend.route({ method: backend_methods, url: urlbase + '*', handler: rfx });
