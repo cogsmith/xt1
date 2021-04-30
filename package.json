@@ -12,8 +12,10 @@
     "fastify-compress": "^3.4.2",
     "fastify-static": "^4.0.1",
     "lodash": "^4.17.21",
+    "nunjucks": "^3.2.3",
     "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
+    "point-of-view": "^4.14.0",
     "yargs": "^16.2.0"
   },
   "versiontaglast": "1.0.39"

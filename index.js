@@ -12,6 +12,7 @@ const nunjucks = require('nunjucks');
 const fastify = require('fastify');
 const fastify_compress = require('fastify-compress');
 const fastify_static = require('fastify-static');
+const fastify_pov = require('point-of-view');
 
 //
 
