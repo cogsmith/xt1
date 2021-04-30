@@ -51,7 +51,7 @@ XT.InitMeta = function () {
     const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
     AppMeta.Name = AppPackage.namelong || AppPackage.name || path.basename(__dirname).toUpperCase();
-    AppMeta.NameTag = AppPackage.nametag || AppPackage.name ? AppPackage.name.toUpperCase() : 'APP';
+    AppMeta.NameTag = AppPackage.nametag || AppPackage.Name || 'APP';
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
 
     App.Package = AppPackage;
