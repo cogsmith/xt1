@@ -37,6 +37,7 @@
     const XT = require('@cogsmith/xt').Init();
     const LOG = XT.Log;
     const App = XT.App;
+    App.Main = function () { LOG.INFO('HELLOWORLD'); };
     App.Run();
 
 ---
