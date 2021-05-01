@@ -9,7 +9,7 @@ WORKDIR /
 RUN npm install --global nodemon
 
 WORKDIR /bin
-RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon /app/app.js $@' >> xtnodemon ; chmod a+x xtnodemon
+RUN echo '#!/bin/sh' > xtnodemon ; echo 'echo nodemon /app/app.js "$@"' >> xtnodemon ; echo 'nodemon /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
 
 WORKDIR /xtnpm
 RUN npm install @cogsmith/xt ; cp -a node_modules / ; npm list --depth=0
