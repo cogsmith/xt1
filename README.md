@@ -44,8 +44,9 @@
         App.Run();
     EOF
     docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
-    docker run -it --rm --name XTNODE --env FORCE_COLOR=1 -v $PWD:/app cogsmith/xtnode node /app/app.js --loglevel trace --logfancy 1
     docker run -it --rm --name XTNODE -v $PWD:/app cogsmith/xtnode
+
+    docker run -it --rm --name XTNODE -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode --loglevel trace --logfancy 0
 
 ---
 
