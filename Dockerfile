@@ -25,7 +25,7 @@ RUN npm install --production ; exit 0
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
-CMD ["--loglevel trace","--logfancy 1"]
+CMD ["--loglevel trace","--logjson 0"]
 
 #
 

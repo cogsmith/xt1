@@ -24,7 +24,7 @@ const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
     .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'trace')
-    .group('logfancy', 'Log').describe('logfancy', 'Log Fancy').default('logfancy', true)
+    .group('logjson', 'Log').describe('logjson', 'Log JSON').default('logjson', false)
     .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
     .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
 const YARGS = YARGY.argv;
@@ -97,7 +97,7 @@ XT.Log.Pretty = {
 XT.Log.GetLogger = function () {
     let logger = pino({
         level: YARGS.loglevel || 'trace',
-        prettyPrint: (YARGS.logfancy == 0) ? false : XT.Log.Pretty,
+        prettyPrint: (YARGS.logjson == 1) ? false : XT.Log.Pretty,
         hooks: {
             logMethod: function (args, method) {
                 if (args.length === 2) { args.reverse() }
