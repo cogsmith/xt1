@@ -9,7 +9,7 @@ WORKDIR /
 RUN npm install --global nodemon
 
 WORKDIR /bin
-RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon /app/app.js' >> xtnodemon ; chmod a+x xtnodemon
+RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon /app/app.js $@' >> xtnodemon ; chmod a+x xtnodemon
 
 WORKDIR /xtnpm
 RUN npm install @cogsmith/xt ; cp -a node_modules / ; npm list --depth=0
@@ -30,3 +30,6 @@ CMD ["--loglevel info"]
 #
 
 #CMD ["nodemon","app.js"]
+
+#RUN echo 'echo $@' > /bin/xtnodemon
+# docker run -it --name XTNODE -v $PWD:/app --entrypoint sh cogsmith/xtnode
