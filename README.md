@@ -34,6 +34,20 @@
 
 ---
 
+# Docker Example
+
+    mkdir /tmp/app ; cd /tmp/app
+    tee app.js <<EOF
+        const XT = require('@cogsmith/xt').Init();
+        const LOG = XT.Log;
+        const App = XT.App;
+        App.Main = function () { LOG.INFO('XTNODE'); };
+        App.Run();
+    EOF
+    docker run --rm --name XTNODE cogsmith/xtnode
+
+---
+
 # Minimal Example
 
     const XT = require('@cogsmith/xt').Init();
