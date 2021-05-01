@@ -34,6 +34,12 @@
 
 ---
 
+# Shell Alias
+
+    alias xtnode='docker run -it --rm --name XTNODE -v `pwd`:/app cogsmith/xtnode'
+
+---
+
 # Docker Example
 
     mkdir /tmp/app ; cd /tmp/app
