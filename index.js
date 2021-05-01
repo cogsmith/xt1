@@ -225,10 +225,7 @@ App.InitBackendRoutes = function () {
     backend.register(require('point-of-view'), {
         engine: { nunjucks: nunjucks },
         options: {
-            onConfigure: nj => {
-                console.log(nj.opts);
-                nj.opts.tags = NJCONFIG.tags;
-            }
+            onConfigure: nj => { nj.opts.tags = NJCONFIG.tags; }
         },
         templates: './views',
         viewExt: 'html',
