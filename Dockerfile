@@ -6,6 +6,6 @@ RUN npm remove @cogsmith/xt ; npm install @cogsmith/xt
 RUN npm install --production
 RUN npm install --global nodemon
 COPY . .
-RUN node --check /app/app.js
+RUN node --check /app/index.js
 #CMD ["nodemon","app.js"]
 CMD ["node","app.js"]
