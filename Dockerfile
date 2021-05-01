@@ -2,7 +2,7 @@ FROM node:15.8.0-alpine3.12
 ENV NODE_ENV=production
 
 WORKDIR /
-RUN npm remove @cogsmith/xt ; npm install @cogsmith/xt
+RUN npm install @cogsmith/xt
 RUN npm install --global nodemon
 
 WORKDIR /xt
