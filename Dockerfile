@@ -5,7 +5,7 @@ WORKDIR /
 RUN npm install --global nodemon
 
 WORKDIR /xtnpm
-RUN npm install @cogsmith/xt ; cp -a node_modules /
+RUN npm install @cogsmith/xt ; cp -a node_modules / ; npm list --depth=0
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
