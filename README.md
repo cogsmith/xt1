@@ -9,7 +9,7 @@
 
 #### <code><a href='https://www.npmjs.com/package/@cogsmith/xt'>📦 [NPM PACKAGE]</a></code>
 
-#### <code><a href='https://hub.docker.com/repository/docker/cogsmith/xtnode'>🐳 [DOCKER RUNTIME IMAGE]</a></code>
+#### <code><a href='https://hub.docker.com/r/cogsmith/xtnode'>🐳 [DOCKER RUNTIME IMAGE]</a></code>
 
 #### <code><a href='https://github.com/cogsmith/xt/blob/main/index.js'>🧾 [VIEW LIB SOURCE CODE]</a></code>
 
