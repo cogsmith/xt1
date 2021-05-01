@@ -37,6 +37,7 @@
 # Shell Alias
 
     alias xtnode='docker run -it --rm --name XTNODE -v `pwd`:/app cogsmith/xtnode'
+    alias xtnodemon='docker run -it --rm --name XTNODE -v `pwd`:/app --entrypoint xtnodemon cogsmith/xtnode'
 
 ---
 
@@ -49,10 +50,12 @@
         App.Main = function () { LOG.INFO('XTNODE'); };
         App.Run();
     EOF
+
+    docker stop XTNODE ; docker wait XTNODE ; sleep 1 ; docker rm XTNODE
     docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
     docker run -it --rm --name XTNODE -v $PWD:/app cogsmith/xtnode
 
-    docker run -it --rm --name XTNODE -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode --loglevel trace --logfancy 0
+    docker run -it --rm --name XTNODE -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode --loglevel trace --logjson 1
 
 ---
 
