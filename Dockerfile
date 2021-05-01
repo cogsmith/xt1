@@ -7,5 +7,6 @@ COPY ["package.json","package-lock.json*","./"]
 RUN npm install --production
 COPY . .
 RUN node --check /xt/index.js
+WORKDIR /app
 #CMD ["nodemon","app.js"]
 CMD ["node","app.js"]
