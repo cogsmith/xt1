@@ -44,7 +44,8 @@
         App.Main = function () { LOG.INFO('XTNODE'); };
         App.Run();
     EOF
-    docker run --rm --name XTNODE cogsmith/xtnode
+    docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
+    docker run --rm --name XTNODE -v $PWD:/app cogsmith/xtnode
 
 ---
 

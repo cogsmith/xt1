@@ -97,7 +97,7 @@ XT.Log.Pretty = {
 XT.Log.GetLogger = function () {
     let logger = pino({
         level: YARGS.loglevel || 'trace',
-        prettyPrint: (YARGS.logfancy == 0) ? XT.Log.Pretty : false,
+        prettyPrint: (YARGS.logfancy == 0) ? false : XT.Log.Pretty,
         hooks: {
             logMethod: function (args, method) {
                 if (args.length === 2) { args.reverse() }

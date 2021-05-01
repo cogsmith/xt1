@@ -17,4 +17,4 @@ RUN node --check index.js
 WORKDIR /app
 RUN npm install --production ; exit 0
 #CMD ["nodemon","app.js"]
-CMD ["node","app.js"]
+CMD ["node","app.js","--loglevel trace"]
