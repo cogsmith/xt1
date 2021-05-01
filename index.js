@@ -18,12 +18,12 @@ const fastify_pov = require('point-of-view');
 
 const NOP = function () { };
 let LOG = NOP; LOG.FATAL = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP;
-const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE;
+const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE; LOG = LOGCONSOLE;
 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
     .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'info')
-    .group('ip', 'Backend').describe('ip', 'Bind Bind IP').default('ip', process.env.host || '127.0.0.1')
+    .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
     .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
 const YARGS = YARGY.argv;
 
@@ -114,8 +114,6 @@ XT.InitLogger = function () {
 }
 
 XT.InitProcess = function () {
-    //LOG.TRACE('XT.InitProcess');
-
     process.setMaxListeners(999); require('events').EventEmitter.prototype._maxListeners = 999;
     process.on('uncaughtException', function (err) { console.log("\n"); console.log(err); console.log("\n"); process.exit(1); }); // throw(Error('ERROR'));
     process.onSIGTERM = function () { console.log('SIGTERM'); process.exit(); }; process.on('SIGTERM', function () { process.onSIGTERM(); });
@@ -127,8 +125,6 @@ XT.Init = function () {
     XT.InitProcess();
     XT.InitApp();
     XT.InitAppInfo();
-    //LOG.TRACE('XT.Init: ' + chalk.white(XT.Meta.Full));
-    //LOG.TRACE('XT.InitDone');
     return XT;
 }
 
@@ -290,7 +286,6 @@ App.InitBackendRoutes = function () {
             //if (App.Args.loglevel == 'trace') { console.log(App.Backend.printRoutes()); }
             //console.log(App.Routes);
             //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.gray(z)) });
-
         }
     });
     App.Backend = backend;
@@ -331,9 +326,6 @@ App.Run = function () {
         App.InitData();
     }
 
-    // if (!App.Routes) { delete App.InitBackend; }
-    //if (!App.Backend && App.Routes && App.InitBackend) {
-
     if (!App.Backend) {
         if (App.InitBackend) {
             LOG.TRACE('App.InitBackend');
@@ -360,7 +352,6 @@ App.Run = function () {
     if (App.Main) {
         LOG.TRACE('App.Main');
         setTimeout(App.Main, 9);
-        //App.Main();
     }
 }
 
