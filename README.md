@@ -34,13 +34,6 @@
 
 ---
 
-# Shell Alias
-
-    alias xtnode='docker run -it --rm --name XTNODE -v `pwd`:/app cogsmith/xtnode'
-    alias xtnodemon='docker run -it --rm --name XTNODE -v `pwd`:/app --entrypoint xtnodemon cogsmith/xtnode'
-
----
-
 # Docker Example
 
     mkdir /tmp/app ; cd /tmp/app
@@ -51,15 +44,14 @@
         App.Run();
     EOF
 
-    docker stop XTNODE ; docker wait XTNODE ; sleep 1 ; docker rm XTNODE
-    docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
-    alias xtnode='docker run -it --rm --name XTNODE -v $PWD:/app cogsmith/xtnode'
-    alias xtnodemon='docker run -it --rm --name XTNODE -v `pwd`:/app --entrypoint xtnodemon cogsmith/xtnode'
+    docker stop XTNODE ; docker wait XTNODE ; sleep 1 ; docker rm XTNODE ; docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
+    alias xtnode='docker run -it --init --rm --name XTNODE -v $PWD:/app cogsmith/xtnode'
+    alias xtnodemon='docker run -it --init --rm --name XTNODE -v `pwd`:/app --entrypoint xtnodemon cogsmith/xtnode'
 
     xtnode
     xtnodemon
 
-    docker run -it --rm --name XTNODE -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode --loglevel trace --logjson 1
+    xtnode --loglevel trace --logjson 1
 
 ---
 
