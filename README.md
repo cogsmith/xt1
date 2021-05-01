@@ -32,7 +32,6 @@
 [![](https://shields.io/docker/image-size/cogsmith/xtnode?sort=date&label=docker+size)](https://hub.docker.com/r/cogsmith/xtnode)
 [![](https://shields.io/github/issues-raw/cogsmith/xt)](https://github.com/cogsmith/xt/issues)
 
-
 ---
 
 # Minimal Example
