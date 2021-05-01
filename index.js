@@ -1,5 +1,7 @@
 const fs = require('fs');
-const path = require('path');
+const nodepath = require('path');
+const nodeos = require('os');
+if (!nodeos.version) { nodeos.version = function () { return 0; } }
 
 const util = require('util');
 const wait = util.promisify(setTimeout);
@@ -59,7 +61,7 @@ XT.InitMeta = function () {
     const AppPackage = fs.existsSync(AppPath + '/' + 'package.json') ? require(AppPath + '/' + 'package.json') : {};
     const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
-    AppMeta.Name = AppPackage.namelong || AppPackage.name || process.env.CELLTAG || path.basename(AppPath).toUpperCase() || 'APP';
+    AppMeta.Name = AppPackage.namelong || AppPackage.name || process.env.CELLTAG || nodepath.basename(AppPath).toUpperCase() || 'APP';
     AppMeta.NameTag = AppPackage.nametag || process.env.CELLTAG || AppPackage.Name || 'APP';
     AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
     AppMeta.Path = AppPath;
@@ -135,7 +137,7 @@ XT.Init = function () {
 XT.InitAppInfo = function () {
     App.InfoDB = {};
     App.SetInfo('Node.Args', process.argv.join(' '));
-    App.SetInfo('Node', require('os').hostname().toUpperCase() + ' : ' + process.pid + '/' + process.ppid + ' : ' + process.cwd() + ' : ' + process.version + ' : ' + require('os').version() + ' : ' + process.title);
+    App.SetInfo('Node', nodeos.hostname().toUpperCase() + ' : ' + process.pid + '/' + process.ppid + ' : ' + process.cwd() + ' : ' + process.version + ' : ' + nodeos.version() + ' : ' + process.title);
     App.SetInfo('App', App.Meta.Full);
 }
 
