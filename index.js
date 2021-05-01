@@ -23,6 +23,7 @@ const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
     .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'info')
+    .group('logfancy', 'Log').describe('logfancy', 'Log Fancy').default('logfancy', true)
     .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
     .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
 const YARGS = YARGY.argv;
@@ -32,6 +33,10 @@ const YARGS = YARGY.argv;
 const XT = {};
 
 XT.NOP = NOP;
+
+XT.Log = { Logger: NOP };
+XT.LOG = XT.Log.Logger;
+
 XT.Wait = wait;
 
 XT.App = {};
@@ -64,9 +69,9 @@ XT.InitMeta = function () {
 
 //
 
-XT.LogLevel = function (level) {
-    XT.Log.level = level || 'trace';
-    let log = XT.Log;
+XT.Log.SetLevel = function (level) {
+    let log = XT.LOG;
+    log.level = level || 'trace';
     if (log.level == 'fatal') { log.TRACE = NOP; log.DEBUG = NOP; log.INFO = NOP; log.WARN = NOP; log.ERROR = NOP; }
     if (log.level == 'error') { log.TRACE = NOP; log.DEBUG = NOP; log.INFO = NOP; log.WARN = NOP; log.ERROR = log.error; }
     if (log.level == 'warn') { log.TRACE = NOP; log.DEBUG = NOP; log.INFO = NOP; log.WARN = log.warn; log.ERROR = log.error; }
@@ -76,24 +81,23 @@ XT.LogLevel = function (level) {
     return log.level;
 }
 
-XT.GetLogger = function () {
-    XT.LogPretty = {
-        colorize: true,
-        singleLine: true,
-        ignore: 'hostname,pid',
-        translateTime: 'SYS:yyyy-mm-dd|HH:MM:ss',
-        messageFormat: function (log, key, label) {
-            let msg = log.msg ? log.msg : '';
-            let logout = chalk.gray(App.Meta.NameTag);
-            if (msg != '') { logout += ' ' + msg };
-            return logout;
-        }
+XT.Log.Pretty = {
+    colorize: true,
+    singleLine: true,
+    ignore: 'hostname,pid',
+    translateTime: 'SYS:yyyy-mm-dd|HH:MM:ss',
+    messageFormat: function (log, key, label) {
+        let msg = log.msg ? log.msg : '';
+        let logout = chalk.gray(App.Meta.NameTag);
+        if (msg != '') { logout += ' ' + msg };
+        return logout;
     }
-    if (YARGS.logpretty == 0) { XT.LogPretty = false; }
+}
 
+XT.Log.GetLogger = function () {
     let logger = pino({
         level: YARGS.loglevel || 'trace',
-        prettyPrint: XT.LogPretty,
+        prettyPrint: (YARGS.logfancy == 0) ? XT.Log.Pretty : false,
         hooks: {
             logMethod: function (args, method) {
                 if (args.length === 2) { args.reverse() }
@@ -108,9 +112,8 @@ XT.GetLogger = function () {
 
 XT.InitLogger = function () {
     // XT.LOG = XT.Log; const LOG = XT.Log; LOG.TRACE = LOG.trace; LOG.DEBUG = LOG.debug; LOG.INFO = LOG.info; LOG.WARN = LOG.warn; LOG.ERROR = LOG.error; LOG.FATAL = LOG.fatal;    
-    XT.Log = XT.GetLogger();
-    XT.LogLevel(YARGS.loglevel || 'trace');
-    LOG = XT.Log;
+    LOG = XT.LOG = XT.Log.Logger = XT.Log.GetLogger();
+    XT.Log.SetLevel(YARGS.loglevel || 'trace');
 }
 
 XT.InitProcess = function () {
@@ -193,7 +196,7 @@ App.InitBackendRoutes = function () {
     backend_methods = 'GET POST'.split(' ');
 
     let backend = require('fastify')({
-        logger: XT.Log,
+        logger: XT.Log.Logger,
         maxParamLength: 999,
         ignoreTrailingSlash: true,
     });
@@ -315,8 +318,8 @@ App.Run = function () {
     //LOG.TRACE({ App: App });
     LOG.TRACE('Node.Info: ' + chalk.white(App.Info('Node')));
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
-    LOG.TRACE('XT.Meta: ' + chalk.gray(XT.Meta.Full));
-    LOG.INFO('App.Meta: ' + chalk.white(App.Meta.Full));
+    LOG.TRACE('XT.Init: ' + chalk.gray(XT.Meta.Full));
+    LOG.INFO('App.Init: ' + chalk.white(App.Meta.Full));
     let appinfo = App.Info('App'); if (appinfo != App.Meta.Full) { LOG.INFO('App.Info: ' + chalk.white(App.Info('App'))); }
 
     LOG.TRACE('App.Run');
