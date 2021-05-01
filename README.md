@@ -45,6 +45,7 @@
     EOF
     docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
     docker run --rm --name XTNODE -v $PWD:/app cogsmith/xtnode
+    docker run -i -t --rm --name XTNODE --env FORCE_COLOR=1 -v $PWD:/app cogsmith/xtnode node /app/app.js --loglevel trace --logfancy 1
 
 ---
 
