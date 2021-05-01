@@ -39,8 +39,7 @@
     mkdir /tmp/app ; cd /tmp/app
     tee app.js <<EOF
         const XT = require('@cogsmith/xt').Init();
-        const LOG = XT.Log;
-        const App = XT.App;
+        const App = XT.App; const LOG = XT.LOG;
         App.Main = function () { LOG.INFO('XTNODE'); };
         App.Run();
     EOF
@@ -52,8 +51,7 @@
 # Minimal Example
 
     const XT = require('@cogsmith/xt').Init();
-    const LOG = XT.Log;
-    const App = XT.App;
+    const App = XT.App; const LOG = XT.LOG;    
     App.Main = function () { LOG.INFO('HELLOWORLD'); };
     App.Run();
 
@@ -62,8 +60,7 @@
 # Simple Example
 
     const XT = require('@cogsmith/xt').Init();
-    const LOG = XT.Log;
-    const App = XT.App;
+    const App = XT.App; const LOG = XT.LOG;    
 
     App.InitInfo = function () { App.SetInfo('App','EXAMPLE_SIMPLE'); }
 
@@ -76,8 +73,7 @@
 # Full Example
 
     const XT = require('@cogsmith/xt').Init();
-    const LOG = XT.Log;
-    const App = XT.App;
+    const App = XT.App; const LOG = XT.LOG;    
 
     App.InitArgs = function () { 
         App.Argy = yargs(process.argv); 

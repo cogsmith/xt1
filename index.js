@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+
 const util = require('util');
 const wait = util.promisify(setTimeout);
 
@@ -33,11 +34,10 @@ const YARGS = YARGY.argv;
 const XT = {};
 
 XT.NOP = NOP;
+XT.Wait = wait;
 
 XT.Log = { Logger: NOP };
 XT.LOG = XT.Log.Logger;
-
-XT.Wait = wait;
 
 XT.App = {};
 const App = XT.App;
