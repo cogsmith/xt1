@@ -45,7 +45,8 @@ const App = XT.App;
 //
 
 XT.InitMeta = function () {
-    XT.Package = require('./package.json');
+    let xtpackagepath = './package.json';
+    XT.Package = fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {};
     XT.Meta = _.merge(XT.Package, {
         Version: XT.Package.version || process.env.npm_package_version || '0.0.0',
         Name: XT.Package.namelong || XT.Package.name || 'XT',
@@ -316,7 +317,7 @@ App.Run = function () {
     process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
 
     //LOG.TRACE({ App: App });
-    LOG.TRACE('Node.Info: ' + chalk.white(App.Info('Node')));
+    LOG.TRACE('Node.Info: ' + chalk.gray(App.Info('Node')));
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
     LOG.TRACE('XT.Init: ' + chalk.gray(XT.Meta.Full));
     LOG.INFO('App.Init: ' + chalk.white(App.Meta.Full));
