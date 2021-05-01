@@ -23,8 +23,8 @@ const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; 
 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
-    .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'info')
-    .group('logfancy', 'Log').describe('logfancy', 'Log Fancy').default('logfancy', false)
+    .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'trace')
+    .group('logfancy', 'Log').describe('logfancy', 'Log Fancy').default('logfancy', true)
     .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
     .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
 const YARGS = YARGY.argv;
