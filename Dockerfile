@@ -9,7 +9,7 @@ WORKDIR /
 RUN npm install --global nodemon
 
 WORKDIR /bin
-RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
+RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
 
 WORKDIR /xtnpm
 RUN npm install @cogsmith/xt ; cp -a node_modules / ; npm list --depth=0
@@ -25,7 +25,7 @@ RUN npm install --production ; exit 0
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
-CMD ["--loglevel trace","--logpretty 1"]
+CMD ["--loglevel trace","--logfancy 1"]
 
 #
 
