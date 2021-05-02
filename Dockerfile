@@ -1,9 +1,18 @@
 FROM node:15.8.0-alpine3.12
+ENV NODE_ENV=production
 
 #
 
-ENV NODE_ENV=production
+#ENV FORCE_COLOR=0
+#ENV NODE_DISABLE_COLORS=0
+#ENV NODE_ENV=production
+#ENV NO_UPDATE_NOTIFIER=1
+#ENV TERM=dumb
+
+#
+
 ENV FORCE_COLOR=0
+ENV NO_UPDATE_NOTIFIER=1
 
 WORKDIR /
 RUN npm install --global nodemon ; echo npm install --global strip-ansi-cli
@@ -26,6 +35,7 @@ RUN npm install --production ; exit 0
 #
 
 ENV FORCE_COLOR=1
+ENV NO_UPDATE_NOTIFIER=0
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
