@@ -12,12 +12,12 @@ ENV NODE_ENV=production
 #
 
 ENV FORCE_COLOR=0
-ENV NO_UPDATE_NOTIFIER=1
+ENV NO_UPDATE_NOTIFIER=true
 ENV NODE_DISABLE_COLORS=1
 ENV TERM=dumb
 
 WORKDIR /
-RUN npm install --global nodemon strip-ansi-cli
+RUN npm install --global nodemon strip-ansi-cli 
 
 WORKDIR /bin
 RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
@@ -27,12 +27,12 @@ RUN echo -e "#\n#" ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; e
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
-RUN npm install --production
+RUN npm install
 COPY . .
 RUN node --check index.js ; echo -e "#\n#"
 
 WORKDIR /app
-RUN npm install --production ; exit 0
+RUN npm install ; exit 0
 
 #
 
