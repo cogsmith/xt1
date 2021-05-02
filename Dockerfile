@@ -12,12 +12,12 @@ ENV NODE_ENV=production
 #
 
 ENV FORCE_COLOR=0
-ENV NO_UPDATE_NOTIFIER=true
-ENV NODE_DISABLE_COLORS=1
-ENV TERM=dumb
+#ENV NO_UPDATE_NOTIFIER=true
+#ENV NODE_DISABLE_COLORS=1
+#ENV TERM=dumb
 
 WORKDIR /
-RUN npm config set update-notifier false
+RUN npm config set update-notifier false > /dev/null
 RUN npm install --global nodemon strip-ansi-cli 
 
 WORKDIR /bin
@@ -39,8 +39,8 @@ RUN npm install ; exit 0
 
 ENV FORCE_COLOR=1
 #ENV NO_UPDATE_NOTIFIER=0
-ENV NODE_DISABLE_COLORS=0
-ENV TERM=linux
+#ENV NODE_DISABLE_COLORS=0
+#ENV TERM=linux
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
