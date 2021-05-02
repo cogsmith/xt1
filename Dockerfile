@@ -17,6 +17,7 @@ ENV NODE_DISABLE_COLORS=1
 ENV TERM=dumb
 
 WORKDIR /
+RUN npm config set update-notifier false
 RUN npm install --global nodemon strip-ansi-cli 
 
 WORKDIR /bin
