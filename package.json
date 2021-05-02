@@ -1,7 +1,7 @@
 {
   "npmpublish": true,
   "license": "GPLv3",
-  "version": "1.0.72",
+  "version": "1.0.73-dev",
   "name": "@cogsmith/xt",
   "nametag": "XT",
   "namelong": "XTNODE",
