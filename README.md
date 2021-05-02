@@ -1,5 +1,5 @@
 # 🧰 XT: NodeJS Application Framework 🧰
-## Process Initialization, Runtime, Logging, Fastify, Nunjucks
+## Process Init, Runtime, Logging, Fastify, Nunjucks
 
 ---
 

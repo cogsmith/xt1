@@ -6,7 +6,7 @@ ENV NODE_ENV=production
 ENV FORCE_COLOR=1
 
 WORKDIR /
-RUN npm install --global nodemon
+RUN npm install --global nodemon ; npm install --global strip-ansi-cli
 
 WORKDIR /bin
 RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
@@ -21,7 +21,7 @@ COPY . .
 RUN node --check index.js ; echo -e "#\n#"
 
 WORKDIR /app
-RUN export TERM=dumb ; export NODE_DISABLE_COLORS=1 ; npm install --production | col -b ; exit 0
+RUN npm install --production | strip-ansi ; exit 0
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
