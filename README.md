@@ -59,8 +59,8 @@
     alias xtnode='xtnodecmd xtnode'
     alias xtnodemon='xtnodecmd xtnodemon'
     alias xtnodepm2='xtnodecmd xtnodepm2'
-    alias xtnoderm="sh -c \"docker stop `xtls` ; docker rm `xtls`\" 2> /dev/null"
-    alias xtnodels='docker container ls -qa --filter name=XTNODE_' ; docker stop `xtls` ; docker rm `xtls`
+    alias xtnodels='docker container ls -qa --filter name=XTNODE_'
+    alias xtnodermall='docker stop `xtls` 2>/dev/null ; docker rm `xtls` 2>/dev/null'
     alias xtnodepull='docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet'
 
     xtnode --loglevel trace --logjson 1
