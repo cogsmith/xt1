@@ -1,7 +1,6 @@
 const fs = require('fs');
 const nodepath = require('path');
-const nodeos = require('os');
-if (!nodeos.version) { nodeos.version = function () { return 0; } }
+const nodeos = require('os'); if (!nodeos.version) { nodeos.version = function () { return 0; } }
 
 const util = require('util');
 const wait = util.promisify(setTimeout);

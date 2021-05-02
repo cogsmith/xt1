@@ -51,11 +51,18 @@
     EOF
 
     docker stop XTNODE ; docker wait XTNODE ; sleep 1 ; docker rm XTNODE ; docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
-    alias xtnode='docker run -it --init --rm --name XTNODE -v $PWD:/app cogsmith/xtnode'
-    alias xtnodemon='docker run -it --init --rm --name XTNODE -v `pwd`:/app --entrypoint xtnodemon cogsmith/xtnode'
+    alias    xtnode='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app cogsmith/xtnode'
+    alias xtnodemon='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode'
+    alias xtnodepm2='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodepm2 cogsmith/xtnode'
+
+    xtnodecmd() { docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint $1 cogsmith/xtnode $2 $3 $4 $5 $6 $7 $8 $9; }
+    alias xtnodemon='xtnodecmd xtnodemon'
+    alias xtnodepm2='xtnodecmd xtnodepm2'
+
 
     xtnode
     xtnodemon
+    xtnodepm2
 
     xtnode --loglevel trace --logjson 1
 

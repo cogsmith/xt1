@@ -1,0 +1,2 @@
+#!/bin/sh
+nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"
