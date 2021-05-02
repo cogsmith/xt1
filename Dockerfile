@@ -20,7 +20,7 @@ RUN echo -e "#\n#" ; echo TERM=$TERM ; echo -e "#\n#"
 
 ENV FORCE_COLOR=0
 #ENV NO_UPDATE_NOTIFIER=true
-#ENV NODE_DISABLE_COLORS=1
+ENV NODE_DISABLE_COLORS=1
 ENV TERM=dumb
 
 WORKDIR /
@@ -31,7 +31,7 @@ WORKDIR /bin
 RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
 
 WORKDIR /xtnpm
-RUN echo -e "#\n#" ; echo 20210502_0612 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
+RUN echo -e "#\n#" ; echo 20210502_0622 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
