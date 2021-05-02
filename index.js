@@ -49,12 +49,10 @@ const App = XT.App;
 XT.InitMeta = function () {
     let xtpackagepath = './package.json';
     XT.Package = fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {};
-    XT.Meta = _.merge(XT.Package, {
-        Version: XT.Package.version || process.env.npm_package_version || '0.0.0',
-        Name: XT.Package.namelong || XT.Package.name || 'XT',
-        NameTag: XT.Package.nametag || XT.Package.name.toUpperCase(),
-        Info: XT.Package.description || ''
-    });
+    XT.Meta = _.merge(XT.Package, { Info: XT.Package.description || '' });
+    XT.Meta.Version = XT.Package.version || process.env.npm_package_version || '0.0.0';
+    XT.Meta.Name = XT.Package.namelong || XT.Package.name || 'XT';
+    XT.Meta.NameTag = XT.Package.nametag || XT.Meta.Name.toUpperCase();
     XT.Meta.Full = XT.Meta.Name + ': ' + XT.Meta.Info + ' [' + XT.Meta.Version + ']';
 
     const AppPath = process.cwd();
