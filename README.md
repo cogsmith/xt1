@@ -51,13 +51,20 @@
     EOF
 
     docker stop XTNODE ; docker wait XTNODE ; sleep 1 ; docker rm XTNODE ; docker rmi cogsmith/xtnode 1>/dev/null ; docker pull cogsmith/xtnode --quiet
+
     alias    xtnode='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app cogsmith/xtnode'
     alias xtnodemon='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode'
     alias xtnodepm2='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodepm2 cogsmith/xtnode'
 
-    xtnodecmd() { RUNEP=$1; shift; docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint $RUNEP cogsmith/xtnode $@; }
+    xtnodecmd () { 
+        RUN_EP=$1; shift; RUN_NAME=XTNODE_`date +%s`;
+        docker run -it --init --rm --name $RUN_NAME -v $PWD:/app --entrypoint $RUN_EP cogsmith/xtnode $@; 
+        unset RUN_EP RUN_NAME;
+    }
+    alias xtnode='xtnodecmd xtnode'
     alias xtnodemon='xtnodecmd xtnodemon'
     alias xtnodepm2='xtnodecmd xtnodepm2'
+
 
     test() { RUNEP=$1 ; shift ; echo "$@" }
 
