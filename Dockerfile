@@ -17,7 +17,7 @@ ENV FORCE_COLOR=0
 #ENV TERM=dumb
 
 WORKDIR /
-RUN npm config set update-notifier false > /dev/null
+RUN npm config set update-notifier false 2> /dev/null
 RUN npm install --global nodemon strip-ansi-cli 
 
 WORKDIR /bin
@@ -28,7 +28,7 @@ RUN echo -e "#\n#" ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; e
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
-RUN npm install
+RUN npm install | strip-ansi
 COPY . .
 RUN node --check index.js ; echo -e "#\n#"
 
