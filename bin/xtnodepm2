@@ -1,2 +1,2 @@
 #!/bin/sh
-pm2 start /app/app.js "$@"
+pm2 start /app/app.js -- "$@"

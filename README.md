@@ -55,9 +55,11 @@
     alias xtnodemon='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodemon cogsmith/xtnode'
     alias xtnodepm2='docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint xtnodepm2 cogsmith/xtnode'
 
-    xtnodecmd() { docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint $1 cogsmith/xtnode $2 $3 $4 $5 $6 $7 $8 $9; }
+    xtnodecmd() { RUNEP=$1; shift; docker run -it --init --rm --name "XTNODE_`date +%s`" -v $PWD:/app --entrypoint $RUNEP cogsmith/xtnode $@; }
     alias xtnodemon='xtnodecmd xtnodemon'
     alias xtnodepm2='xtnodecmd xtnodepm2'
+
+    test() { RUNEP=$1 ; shift ; echo "$@" }
 
 
     xtnode
