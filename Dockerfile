@@ -21,7 +21,7 @@ COPY . .
 RUN node --check index.js ; echo -e "#\n#"
 
 WORKDIR /app
-RUN export TERM=dumb ; export NODE_DISABLE_COLORS=1 ; npm install --production ; exit 0
+RUN export TERM=dumb ; export NODE_DISABLE_COLORS=1 ; npm install --production | col -b ; exit 0
 
 WORKDIR /app
 ENTRYPOINT ["node","app.js"]
