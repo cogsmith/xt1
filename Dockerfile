@@ -23,10 +23,12 @@ ENV TERM=dumb
 
 WORKDIR /
 RUN npm config set update-notifier false 2> /dev/null
-RUN npm install --global nodemon strip-ansi-cli 
+RUN npm install --global nodemon pm2
 
 WORKDIR /bin
 RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
+#RUN echo '#!/bin/sh' > xtnodepm2 ; echo 'pm2 start /app/app.js "$@"' >> xtnodepm2 ; chmod a+x xtnodepm2
+RUN echo '#!/bin/sh' > xtnodepm2 ; echo 'pm2-runtime /app/app.js "$@"' >> xtnodepm2 ; chmod a+x xtnodepm2
 
 WORKDIR /xtnpm
 RUN echo -e "#\n#" ; echo 20210502_0627 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
