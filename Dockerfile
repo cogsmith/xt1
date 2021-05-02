@@ -27,17 +27,19 @@ RUN npm install --global nodemon pm2
 
 WORKDIR /bin
 COPY bin .
+RUN chmod a+x xtnodemon xtnodepm2
 #RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
 #RUN echo '#!/bin/sh' > xtnodepm2 ; echo 'pm2 start /app/app.js "$@"' >> xtnodepm2 ; chmod a+x xtnodepm2
 #RUN echo '#!/bin/sh' > xtnodepm2 ; echo 'pm2-runtime /app/app.js "$@"' >> xtnodepm2 ; chmod a+x xtnodepm2
 
 WORKDIR /xtnpm
-RUN echo -e "#\n#" ; echo 20210502_0700 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
+RUN echo -e "#\n#" ; echo 20210502_0736 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
 RUN npm install
 COPY . .
+RUN chmod a+x bin/* ; cp bin/* /bin
 RUN node --check index.js ; echo -e "#\n#"
 
 #
