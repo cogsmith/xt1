@@ -28,12 +28,12 @@ RUN echo -e "#\n#" ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; e
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
-RUN npm install | strip-ansi
+RUN npm install
 COPY . .
 RUN node --check index.js ; echo -e "#\n#"
 
 WORKDIR /app
-RUN npm install ; exit 0
+RUN npm install | strip-ansi
 
 #
 
