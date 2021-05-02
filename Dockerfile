@@ -7,14 +7,21 @@ ENV NODE_ENV=production
 #ENV NODE_DISABLE_COLORS=0
 #ENV NODE_ENV=production
 #ENV NO_UPDATE_NOTIFIER=1
+
+#ENV TERM=xterm-256color
+#ENV TERM=linux
 #ENV TERM=dumb
+
+#
+
+RUN echo -e "#\n#" ; echo TERM=$TERM ; echo -e "#\n#"
 
 #
 
 ENV FORCE_COLOR=0
 #ENV NO_UPDATE_NOTIFIER=true
 #ENV NODE_DISABLE_COLORS=1
-#ENV TERM=dumb
+ENV TERM=dumb
 
 WORKDIR /
 RUN npm config set update-notifier false 2> /dev/null
@@ -24,7 +31,7 @@ WORKDIR /bin
 RUN echo '#!/bin/sh' > xtnodemon ; echo 'nodemon --delay 2.5 --ignore package.json --ignore package.json /app/app.js "$@"' >> xtnodemon ; chmod a+x xtnodemon
 
 WORKDIR /xtnpm
-RUN echo -e "#\n#" ; echo 20210502_0533 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
+RUN echo -e "#\n#" ; echo 20210502_0612 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
