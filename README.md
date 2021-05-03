@@ -64,19 +64,6 @@
 
 ---
 
-# Simple Example
-
-    const XT = require('@cogsmith/xt').Init();
-    const App = XT.App; const LOG = XT.LOG;    
-
-    App.InitInfo = function () { App.SetInfo('App','EXAMPLE_SIMPLE'); }
-
-    App.Routes = { '/random': (req,rep) => { rep.send(Math.random(); } };
-
-    App.Run();
-
----
-
 # Full Example
 
     const XT = require('@cogsmith/xt').Init();
