@@ -14,8 +14,7 @@ else if (args[0]=='shellsetup' || args[1]=='shellsetup') {
     console.log(shellsetup);
 }
 else if (fs.existsSync('/app/app.js')) {
-    let cmd = '/bin/nodesh /app/app.js '+args.join(' ');
-    console.log('CMD: ' + cmd);
+    let cmd = 'node /app/app.js '+args.join(' ');
     XT.EXECA.command(cmd).stdout.pipe(process.stdout);
 }
 else {
