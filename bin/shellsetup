@@ -4,9 +4,13 @@ xtnodecmd () {
     unset RUN_EP RUN_NAME;
 };
 
+outnull () {
+    eval "$@" 1>/dev/null 2>/dev/null
+};
+
 alias xtnode='xtnodecmd xtnode';
 alias xtnodemon='xtnodecmd xtnodemon';
 alias xtnodepm2='xtnodecmd xtnodepm2';
 alias xtnodels='docker container ls -qa --filter name=XTNODE_';
-alias xtnoderm='docker stop `xtnodels` 2>/dev/null ; docker rm `xtnodels` 2>/dev/null';
-alias xtnodepull='docker rmi cogsmith/xtnode 1>/dev/null 2>/dev/null ; docker pull cogsmith/xtnode 1>/dev/null 2>/dev/null ; xtnode version';
+alias xtnoderm='outnull docker stop `xtnodels` ; outnull docker rm `xtnodels`';
+alias xtnodepull='outnull docker rmi cogsmith/xtnode ; outnull docker pull cogsmith/xtnode ; xtnode version';
