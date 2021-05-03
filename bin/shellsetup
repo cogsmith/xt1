@@ -14,8 +14,3 @@ alias xtnodepm2='xtnodecmd xtnodepm2';
 alias xtnodels='docker container ls -qa --filter name=XTNODE_';
 alias xtnoderm='mute docker stop `xtnodels` ; mute docker rm `xtnodels`';
 alias xtnodepull='mute docker rmi cogsmith/xtnode ; mute docker pull cogsmith/xtnode ; xtnode version';
-
-foobar () { 
-    FOOBAR=${FOOBAR:-'999'};
-    echo $FOOBAR;
-};
