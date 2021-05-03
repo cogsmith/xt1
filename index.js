@@ -323,7 +323,7 @@ App.Run = function () {
     //LOG.TRACE({ App: App });
     LOG.TRACE('Node.Info: ' + chalk.gray(App.Info('Node')));
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
-    LOG.TRACE('XT.Init: ' + chalk.gray(XT.Meta.Full));
+    LOG.DEBUG('XT.Init: ' + chalk.gray(XT.Meta.Full));
     LOG.INFO('App.Init: ' + chalk.white(App.Meta.Full));
     let appinfo = App.Info('App'); if (appinfo != App.Meta.Full) { LOG.INFO('App.Info: ' + chalk.white(App.Info('App'))); }
 

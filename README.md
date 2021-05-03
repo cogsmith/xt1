@@ -73,10 +73,13 @@
     EOF
     
     eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
+    xtnode version
+
+    # LOCALHOST Only By Default
     xtnode
 
-    XTNODE_BINDIP=0.0.0.0
-    xtnode
+    # Public Bind IP
+    XTNODE_BINDIP=0.0.0.0 ; xtnode
 
 ---
 
