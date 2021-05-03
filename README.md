@@ -75,6 +75,9 @@
     eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
     xtnode
 
+    XTNODE_BINDIP=0.0.0.0
+    xtnode
+
 ---
 
 # Minimal Example

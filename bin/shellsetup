@@ -1,7 +1,7 @@
 xtnodecmd () { 
     RUN_EP=$1; RUN_NAME=XTNODE_`date +%s`; shift;
-    export XTNODE_BINDIP=${XTNODE_BINDIP:-'127.0.0.1'};
-    export XTNODE_BINDPORT=${XTNODE_BINDPORT:-'80'};
+    XTNODE_BINDIP=${XTNODE_BINDIP:-'127.0.0.1'};
+    XTNODE_BINDPORT=${XTNODE_BINDPORT:-'80'};
     docker run -it --init --rm --name $RUN_NAME -v $PWD:/app --env HOST=0.0.0.0 --env PORT=9 -p $XTNODE_BINDIP:$XTNODE_BINDPORT:9 --entrypoint $RUN_EP cogsmith/xtnode $@; 
     unset RUN_EP RUN_NAME;
 };
@@ -14,3 +14,8 @@ alias xtnodepm2='xtnodecmd xtnodepm2';
 alias xtnodels='docker container ls -qa --filter name=XTNODE_';
 alias xtnoderm='mute docker stop `xtnodels` ; mute docker rm `xtnodels`';
 alias xtnodepull='mute docker rmi cogsmith/xtnode ; mute docker pull cogsmith/xtnode ; xtnode version';
+
+foobar () { 
+    FOOBAR=${FOOBAR:-'999'};
+    echo $FOOBAR;
+};

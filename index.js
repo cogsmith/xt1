@@ -232,6 +232,7 @@ App.InitBackendRoutes = function () {
 
     backend.addHook('onRequest', (req, rep, nxt) => {
         let reqip = req.socket.remoteAddress;
+        LOG.DEBUG(reqip + ' ' + req.url);
         //App.Requests++; if (!App.Clients[reqip]) { App.Clients[reqip] = 1; } else { App.Clients[reqip]++; }
         nxt();
     });
