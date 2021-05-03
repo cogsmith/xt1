@@ -247,13 +247,13 @@ App.InitBackendRoutes = function () {
             let rkey = routekeys[i];
             let rfx = App.Routes[rkey];
             if (rkey.startsWith('/') || rkey.startsWith('*')) {
-                LOG.TRACE('Backend.Route: ' + rkey);
+                LOG.DEBUG('Backend.Route: ' + rkey);
                 backend.route({ method: backend_methods, url: urlbase + rkey, handler: rfx });
             }
             else {
                 if (rkey == 'ELSE' && rfx) {
                     if (!App.Routes['*']) {
-                        LOG.TRACE('Backend.Route: ' + rkey);
+                        LOG.DEBUG('Backend.Route: ' + rkey);
                         backend.route({ method: backend_methods, url: '*', handler: rfx });
                     }
                 }
@@ -261,7 +261,7 @@ App.InitBackendRoutes = function () {
         }
 
         if (!App.Routes['*'] && !App.Routes.ELSE && App.Routes.ELSEROOT) {
-            LOG.TRACE('Backend.Route: ELSEROOT');
+            LOG.DEBUG('Backend.Route: ELSEROOT');
             let rfx = (req, rep) => {
                 console.log(urlbase);
                 console.log(req.url);

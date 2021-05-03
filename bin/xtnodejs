@@ -4,6 +4,7 @@ const XT = require('@cogsmith/xt').Init();
 let args = process.argv;
 let nodebin = args.shift();
 let nodeapp = args.shift();
+
 if (args[0]=='shellsetup' || args[1]=='shellsetup') {
     let shellsetup = fs.readFileSync('/bin/shellsetup').toString();
     console.log(shellsetup);
