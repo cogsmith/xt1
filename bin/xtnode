@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ $2 -eq 'shellsetupcat' ]]
+if [[ $2 == 'shellsetup' ]]
 then
     cat /bin/shellsetup
 else
