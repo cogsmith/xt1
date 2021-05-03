@@ -6,5 +6,5 @@ elif [[ "$#" -ge 1 ]] && [[ "$1" == 'shellsetup' ]] ; then cat /bin/shellsetup
 elif [[ -f /app/app.js ]] ; then
     cd /app ; node /app/app.js "$@"
 else
-    echo 'XTNODE_ERROR_NOAPP: MISSING SCRIPT = /app/app.js'
+    echo 'XTNODE_ERROR_NOAPP_MISSING_SCRIPT: app.js'
 fi
