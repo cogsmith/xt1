@@ -1,9 +1,10 @@
 #!/bin/sh
 
-if [[ $2 == 'shellsetup' ]]
-then
-    cat /bin/shellsetup
-else
+if [[ "$#" -ge 2 ]] ; then
+    if [[ $2 == 'shellsetup' ]] ; then cat /bin/shellsetup ; fi
+elif [[ -f /app/app.js ]] ; then
     cd /app
     node /app/app.js "$@"
+else
+    echo 'XTNODE:ERROR_NOAPP: MISSING /app/app.js'
 fi
