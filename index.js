@@ -25,7 +25,7 @@ const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; 
 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
-    .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'trace')
+    .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', 'debug')
     .group('logjson', 'Log').describe('logjson', 'Log JSON').default('logjson', false)
     .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
     .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
@@ -197,7 +197,7 @@ App.InitBackendRoutes = function () {
     backend_methods = 'GET POST'.split(' ');
 
     let backend = require('fastify')({
-        logger: XT.Log.Logger,
+        //logger: XT.Log.Logger,
         maxParamLength: 999,
         ignoreTrailingSlash: true,
         trustProxy: (App.TrustProxy ? true : false)
@@ -286,7 +286,7 @@ App.InitBackendRoutes = function () {
     backend.listen(App.Port, App.IP, (err, address) => {
         if (err) { LOG.ERROR(err); throw err; }
         else {
-            LOG.TRACE('App.InitBackend:Done');
+            LOG.DEBUG('App.InitBackend: ' + address);
             //if (App.Args.loglevel == 'trace') { console.log(App.Backend.printRoutes()); }
             //console.log(App.Routes);
             //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.gray(z)) });
