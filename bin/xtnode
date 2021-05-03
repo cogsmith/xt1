@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if false; then echo 0
-elif [[ "$#" -ge 2 ]] && [[ $2 == 'shellsetup' ]] ; then cat /bin/shellsetup
-elif [[ "$#" -ge 1 ]] && [[ $1 == 'shellsetup' ]] ; then cat /bin/shellsetup
+elif [[ "$#" -ge 2 ]] && [[ "$2" == 'shellsetup' ]] ; then cat /bin/shellsetup
+elif [[ "$#" -ge 1 ]] && [[ "$1" == 'shellsetup' ]] ; then cat /bin/shellsetup
 elif [[ -f /app/app.js ]] ; then
     cd /app ; node /app/app.js "$@"
 else

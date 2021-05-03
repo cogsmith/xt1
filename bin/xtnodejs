@@ -1,0 +1,22 @@
+const fs = require('fs');
+const XT = require('@cogsmith/xt').Init();
+const nodeproc = require('child_process');
+
+//console.log('XTNODEJS');
+//console.log(process.argv);
+
+let args = process.argv;
+let nodebin = args.shift();
+let nodeapp = args.shift();
+if (args[0]=='shellsetup' || args[1]=='shellsetup') {
+    let shellsetup = fs.readFileSync('/bin/shellsetup').toString();
+    console.log(shellsetup);
+}
+else if (fs.existsSync('/app/app.js')) {
+    let cmd = '/bin/nodesh '+args.join(' ');
+    console.log('CMD: ' + cmd);
+    XT.EXECA.command(cmd).stdout.pipe(process.stdout); });
+}
+else {
+    console.log('XTNODE_ERROR_NOAPP: MISSING SCRIPT = /app/app.js');
+}

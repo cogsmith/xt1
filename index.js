@@ -7,6 +7,7 @@ const wait = util.promisify(setTimeout);
 
 const _ = require('lodash');
 const pino = require('pino');
+const execa = require('execa');
 const chalk = require('chalk');
 const yargs = require('yargs/yargs');
 const nunjucks = require('nunjucks');
@@ -36,6 +37,7 @@ const XT = {};
 
 XT.NOP = NOP;
 XT.Wait = wait;
+XT.EXECA = execa;
 
 XT.Log = { Logger: NOP };
 XT.LOG = XT.Log.Logger;
