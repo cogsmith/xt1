@@ -49,9 +49,11 @@
         App.Main = function () { LOG.INFO('XTNODE'); };
         App.Run();
     EOF
-
-    eval `docker run --rm cogsmith/xtnode shellsetup` ; xtnodepull
+    
+    eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
+    xtnode version
     xtnode --loglevel trace --logjson 1
+    xtnodemon --loglevel trace
 
 ---
 

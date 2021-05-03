@@ -54,7 +54,7 @@ XT.InitMeta = function () {
     XT.Meta.Version = XT.Package.version || process.env.npm_package_version || '0.0.0';
     XT.Meta.Name = XT.Package.namelong || XT.Package.name || 'XT';
     XT.Meta.NameTag = XT.Package.nametag || XT.Meta.Name.toUpperCase();
-    XT.Meta.Full = XT.Meta.Name + ': ' + XT.Meta.Info + ' [' + XT.Meta.Version + ']';
+    XT.Meta.Full = XT.Meta.Name + ': ' + (XT.Meta.Info ? XT.Meta.Info + ' ' : '') + '[' + XT.Meta.Version + ']';
 
     const AppPath = process.cwd();
     const AppPackage = fs.existsSync(AppPath + '/' + 'package.json') ? require(AppPath + '/' + 'package.json') : {};
