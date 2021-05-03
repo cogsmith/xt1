@@ -42,8 +42,12 @@ ENV FORCE_COLOR=1
 #ENV NODE_DISABLE_COLORS=0
 #ENV TERM=linux
 
+#WORKDIR /app
+#ENTRYPOINT ["node","app.js"]
+#CMD ["--loglevel trace","--logjson 0"]
+
 WORKDIR /app
-ENTRYPOINT ["node","app.js"]
+ENTRYPOINT ["xtnode","app.js"]
 CMD ["--loglevel trace","--logjson 0"]
 
 #
