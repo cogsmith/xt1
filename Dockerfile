@@ -47,5 +47,5 @@ ENV FORCE_COLOR=1
 #CMD ["--loglevel trace","--logjson 0"]
 
 WORKDIR /app
-ENTRYPOINT ["/bin/nodesh","/bin/xtnodejs"]
+ENTRYPOINT ["node","/bin/xtnodejs"]
 CMD ["--loglevel trace","--logjson 0"]
