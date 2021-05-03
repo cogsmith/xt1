@@ -200,7 +200,7 @@ App.InitBackendRoutes = function () {
         logger: XT.Log.Logger,
         maxParamLength: 999,
         ignoreTrailingSlash: true,
-        trustProxy: App.TrustProxy
+        trustProxy: (App.TrustProxy ? true : false)
     });
 
     backend.register(require('fastify-compress'));
@@ -300,7 +300,7 @@ App.InitBackendRoutes = function () {
 //
 
 App.Run = function () {
-    App.TrustProxy = process.env.TRUSTPROXY || false;
+    App.TrustProxy = App.TrustProxy || process.env.TRUSTPROXY || false;
 
     process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
 
