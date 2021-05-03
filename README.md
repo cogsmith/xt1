@@ -40,7 +40,7 @@
 
 ---
 
-# Docker Example
+# Docker Examples
 
     mkdir /tmp/app ; cd /tmp/app
     tee app.js <<EOF
@@ -56,7 +56,24 @@
     xtnode
     xtnode --loglevel trace 
     xtnode --loglevel trace --logjson 1
+
     xtnodemon --loglevel trace
+
+---
+
+# Docker Webserver
+
+    mkdir /tmp/app ; cd /tmp/app
+    tee app.js <<EOF
+        const XT = require('@cogsmith/xt').Init();
+        const App = XT.App; const LOG = XT.LOG;
+        App.Routes = {};
+        App.Routes['*'] = (req,rep) => { rep.send(Math.random()); };
+        App.Run();
+    EOF
+    
+    eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
+    xtnode
 
 ---
 
