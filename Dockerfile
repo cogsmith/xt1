@@ -47,7 +47,7 @@ ENV FORCE_COLOR=1
 #CMD ["--loglevel trace","--logjson 0"]
 
 WORKDIR /app
-ENTRYPOINT ["xtnode","app.js"]
+ENTRYPOINT ["/bin/xtnode","/app/app.js"]
 CMD ["--loglevel trace","--logjson 0"]
 
 #

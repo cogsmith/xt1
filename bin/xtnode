@@ -2,6 +2,7 @@
 
 if [[ "$#" -ge 2 ]] ; then
     if [[ $2 == 'shellsetup' ]] ; then cat /bin/shellsetup ; fi
+elif   [[ $1 == 'shellsetup' ]] ; then cat /bin/shellsetup ; fi
 elif [[ -f /app/app.js ]] ; then
     cd /app
     node /app/app.js "$@"
