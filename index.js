@@ -49,7 +49,7 @@ const App = XT.App;
 
 XT.InitMeta = function () {
     let xtpackagepath = './package.json';
-    XT.Package = fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {};
+    XT.Package = {}; try { XT.Package = require(xtpackagepath); } catch (ex) { console.log(ex); } // fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {}
     XT.Meta = _.merge(XT.Package, { Info: XT.Package.description || '' });
     XT.Meta.Version = XT.Package.version || process.env.npm_package_version || '0.0.0';
     XT.Meta.Name = XT.Package.namelong || XT.Package.name || 'XT';
@@ -168,7 +168,6 @@ App.Exit = function (z, data) {
 App.ExitSilent = function () { App.Exit({ silent: true }); }
 
 //
-
 
 App.Info = function (id) {
     let z = App.InfoDB[id];
