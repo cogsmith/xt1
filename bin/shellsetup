@@ -1,7 +1,7 @@
 xtnodecmd () { 
     RUN_EP=$1; RUN_NAME=XTNODE_`date +%s`; shift;
-    XTNODE_BINDIP=${XTNODE_BINDIP:-'127.0.0.1'};
-    XTNODE_BINDPORT=${XTNODE_BINDPORT:-'80'};
+    export XTNODE_BINDIP=${XTNODE_BINDIP:-'127.0.0.1'};
+    export XTNODE_BINDPORT=${XTNODE_BINDPORT:-'80'};
     docker run -it --init --rm --name $RUN_NAME -v $PWD:/app --env HOST=0.0.0.0 --env PORT=9 -p $XTNODE_BINDIP:$XTNODE_BINDPORT:9 --entrypoint $RUN_EP cogsmith/xtnode $@; 
     unset RUN_EP RUN_NAME;
 };
