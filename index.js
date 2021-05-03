@@ -200,6 +200,7 @@ App.InitBackendRoutes = function () {
         logger: XT.Log.Logger,
         maxParamLength: 999,
         ignoreTrailingSlash: true,
+        trustProxy: App.TrustProxy
     });
 
     backend.register(require('fastify-compress'));
@@ -291,12 +292,18 @@ App.InitBackendRoutes = function () {
             //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.gray(z)) });
         }
     });
+
+    // App.Backend = { Server: backend };
     App.Backend = backend;
 }
 
 //
 
 App.Run = function () {
+    App.TrustProxy = process.env.TRUSTPROXY || false;
+
+    process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
+
     if (App.InitArgs) {
         //LOG.TRACE('App.InitArgs');
         App.InitArgs();
@@ -313,8 +320,6 @@ App.Run = function () {
     if (App.Args.help) { App.Argy.showHelp('log'); console.log("\n" + App.Info('Node') + "\n"); App.ExitSilent(); }
     if (App.Args.version) { console.log(App.Meta.Version); App.ExitSilent(); }
 
-    process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
-
     //LOG.TRACE({ App: App });
     LOG.TRACE('Node.Info: ' + chalk.gray(App.Info('Node')));
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
@@ -329,7 +334,7 @@ App.Run = function () {
         App.InitData();
     }
 
-    if (!App.Backend) {
+    if (!App.Backend) { // || !App.Backend.Server) {
         if (App.InitBackend) {
             LOG.TRACE('App.InitBackend');
             App.InitBackend();
