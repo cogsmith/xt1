@@ -6,7 +6,7 @@ let nodebin = args.shift();
 let nodeapp = args.shift();
 
 if (false) {}
-else if args[0]=='version' || args[1]=='version') {
+else if (args[0]=='version' || args[1]=='version') {
     console.log(XT.Meta.Version);
 }
 else if (args[0]=='shellsetup' || args[1]=='shellsetup') {
