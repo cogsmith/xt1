@@ -50,7 +50,7 @@
         App.Run();
     EOF
 
-    eval `docker run --rm cogsmith/xtnode shellsetup`
+    eval `docker run --rm cogsmith/xtnode shellsetupcat`
     xtnode --loglevel trace --logjson 1
 
 ---
