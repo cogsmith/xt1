@@ -52,6 +52,9 @@
     
     eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
     xtnode version
+
+    xtnode
+    xtnode --loglevel trace 
     xtnode --loglevel trace --logjson 1
     xtnodemon --loglevel trace
 

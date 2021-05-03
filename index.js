@@ -62,7 +62,7 @@ XT.InitMeta = function () {
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
     AppMeta.Name = AppPackage.namelong || AppPackage.name || process.env.CELLTAG || nodepath.basename(AppPath).toUpperCase() || 'APP';
     AppMeta.NameTag = AppPackage.nametag || process.env.CELLTAG || AppPackage.Name || 'APP';
-    AppMeta.Full = AppMeta.Name + ': ' + AppMeta.Info + ' [' + AppMeta.Version + ']';
+    AppMeta.Full = AppMeta.Name + ': ' + (AppMeta.Info ? AppMeta.Info + ' ' : '') + '[' + AppMeta.Version + ']';
     AppMeta.Path = AppPath;
 
     App.Package = AppPackage;
