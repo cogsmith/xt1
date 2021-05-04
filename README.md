@@ -50,7 +50,7 @@
         App.Run();
     EOF
     
-    eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
+    eval `docker run --rm cogsmith/xtnode evalxtnode 2>/dev/null`
     xtnode version
 
     xtnode
@@ -72,7 +72,7 @@
         App.Run();
     EOF
     
-    eval `docker run --rm cogsmith/xtnode shellsetup 2>/dev/null`
+    eval `docker run --rm cogsmith/xtnode evalxtnode 2>/dev/null`
     xtnode version
 
     # LOCALHOST Only By Default

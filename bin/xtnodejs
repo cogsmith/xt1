@@ -11,9 +11,9 @@ if (false) {}
 else if (args[0]=='version' || args[1]=='version') {
     console.log(XT.Meta.Version);
 }
-else if (args[0]=='shellsetup' || args[1]=='shellsetup') {
-    let shellsetup = fs.readFileSync('/bin/shellsetup').toString();
-    console.log(shellsetup);
+else if (args[0]=='evalxtnode' || args[1]=='evalxtnode') {
+    let evalxtnode = fs.readFileSync('/bin/evalxtnode').toString();
+    console.log(evalxtnode);
 }
 else if (fs.existsSync('/app/app.js')) {
     let cmd = 'node /app/app.js '+args.join(' ');
