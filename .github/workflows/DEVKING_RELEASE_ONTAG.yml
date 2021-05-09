@@ -5,11 +5,12 @@ on:
     branches: [ main ]
 jobs:
   build:
-    runs-on: ubuntu-latest
     if: ${{ github.event.head_commit.message == 'TAG' }}
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: npm -v
-    - run: npm ci
-      continue-on-error: true
-    - run: node --check ./app.js
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: cogsmith/devking-release@main
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
