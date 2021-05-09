@@ -1,2 +1,2 @@
 #!/bin/sh
-node /bin/xtnodejs "$@"
+node /bin/xtnode.js "$@"
