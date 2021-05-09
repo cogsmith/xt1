@@ -74,7 +74,7 @@
     eval `docker run --rm cogsmith/xtnode evalxtnode 2>/dev/null`
     xtnode version
 
-    # Default Bind IP: XTNODE_BINDIP=127.0.0.1
+    # Default Bind IP # XTNODE_BINDIP=127.0.0.1
     xtnode
 
     # Public Bind IP
