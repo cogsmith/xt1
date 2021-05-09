@@ -67,15 +67,14 @@
     tee app.js <<EOF
         const XT = require('@cogsmith/xt').Init();
         const App = XT.App; const LOG = XT.LOG;
-        App.Routes = {};
-        App.Routes['*'] = (req,rep) => { rep.send(Math.random()); };
+        App.Routes = { ELSE: (req,rep) => { rep.send(Math.random()); } };
         App.Run();
     EOF
     
     eval `docker run --rm cogsmith/xtnode evalxtnode 2>/dev/null`
     xtnode version
 
-    # LOCALHOST Only By Default
+    # Default Bind IP: XTNODE_BINDIP=127.0.0.1
     xtnode
 
     # Public Bind IP

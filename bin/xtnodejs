@@ -20,5 +20,5 @@ else if (fs.existsSync('/app/app.js')) {
     XT.EXECA.command(cmd).stdout.pipe(process.stdout);
 }
 else {
-    console.log('XTNODE_ERROR_NOAPP_MISSING_SCRIPT: app.js');
+    console.log('# XTNODE_ERROR_NOAPP_MISSING_SCRIPT: app.js');
 }

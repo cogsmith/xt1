@@ -27,17 +27,36 @@ const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
     .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', process.env.LOGLEVEL || 'debug')
     .group('logjson', 'Log').describe('logjson', 'Log JSON').default('logjson', process.env.LOGJSON || false)
-    .group('ip', 'Backend').describe('ip', 'Backend Bind IP').default('ip', process.env.HOST || '127.0.0.1')
-    .group('port', 'Backend').describe('port', 'Backend Bind Port').default('port', process.env.PORT || 80);
+    .group('bindip', 'Backend').describe('bindip', 'Backend Bind IP').default('bindip', process.env.HOST || '127.0.0.1')
+    .group('bindport', 'Backend').describe('bindport', 'Backend Bind Port').default('bindport', process.env.PORT || 80);
 const YARGS = YARGY.argv;
+
+/*
+
+PROCESS.ENV
+
+HOST
+PORT
+
+LOGLEVEL
+LOGJSON
+
+CELLTAG
+CELLBASE
+
+TRUSTPROXY
+
+npm_package_version
+
+*/
 
 //
 
 const XT = {};
 
 XT.NOP = NOP;
-XT.Wait = wait;
 XT.EXECA = execa;
+XT.Wait = wait;
 
 XT.Log = { Logger: NOP };
 XT.LOG = XT.Log.Logger;
@@ -113,7 +132,6 @@ XT.Log.GetLogger = function () {
 //
 
 XT.InitLogger = function () {
-    // XT.LOG = XT.Log; const LOG = XT.Log; LOG.TRACE = LOG.trace; LOG.DEBUG = LOG.debug; LOG.INFO = LOG.info; LOG.WARN = LOG.warn; LOG.ERROR = LOG.error; LOG.FATAL = LOG.fatal;    
     LOG = XT.LOG = XT.Log.Logger = XT.Log.GetLogger();
     XT.Log.SetLevel(YARGS.loglevel || 'trace');
 }
@@ -278,15 +296,16 @@ App.InitBackendRoutes = function () {
         //else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
 
         if (App.Routes['NOTFOUND']) { backend.setNotFoundHandler(App.Routes.NOTFOUND); }
+        else if (App.Routes['ELSEROOT']) { backend.setNotFoundHandler(); }
         else { backend.setNotFoundHandler((req, rep) => { rep.code(404).send(); }); }
     }
 
-    if (!App.IP) { App.IP = YARGS.ip; }
-    if (!App.Port) { App.Port = YARGS.port; }
-    backend.listen(App.Port, App.IP, (err, address) => {
+    if (!App.IP) { App.IP = App.Args.bindip; }
+    if (!App.Port) { App.Port = App.Args.bindport; }
+    backend.listen(App.Port, App.IP, (err, bindaddress) => {
         if (err) { LOG.ERROR(err); throw err; }
         else {
-            LOG.DEBUG('App.InitBackend: ' + address);
+            LOG.DEBUG('App.InitBackend: Server Online @ ' + bindaddress);
             //if (App.Args.loglevel == 'trace') { console.log(App.Backend.printRoutes()); }
             //console.log(App.Routes);
             //Object.keys(App.Routes).sort().forEach(z => { console.log(chalk.gray(z)) });
