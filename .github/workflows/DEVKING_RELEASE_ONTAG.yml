@@ -1,10 +1,11 @@
+#
 name: DEVKING_RELEASE_ONTAG
 on:
   workflow_dispatch:  
   push:
     branches: [ main ]
 jobs:
-  build:
+  job:
     if: ${{ github.event.head_commit.message == 'TAG' }}
     runs-on: ubuntu-latest
     steps:
@@ -14,3 +15,4 @@ jobs:
       - uses: cogsmith/devking-release@main
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#
