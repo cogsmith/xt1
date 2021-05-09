@@ -23,3 +23,4 @@ alias xtnodeuninstall='docker update --restart no';
 alias xtnodedebug='echo ; echo XTNODE=`xtnode version` ; echo HOST=$HOST ; echo PORT=$PORT ; echo ; LOGLEVEL=debug ; xtnode';
 alias xtnodetrace='echo ; echo XTNODE=`xtnode version` ; echo HOST=$HOST ; echo PORT=$PORT ; echo ; LOGLEVEL=trace ; xtnode';
 alias xtnodeversion='docker run --rm cogsmith/xtnode version';
+alias xtnodegit='xtnodecmd xtnodegit';

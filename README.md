@@ -40,7 +40,7 @@
 
 ---
 
-# Docker Examples
+# Run Via Docker
 
     mkdir /tmp/app ; cd /tmp/app
     tee app.js <<EOF
@@ -80,6 +80,12 @@
     # Public Bind IP
     XTNODE_BINDIP=0.0.0.0 ; xtnode
 
+---
+
+# Docker App From Git Repo
+
+    eval `docker run --rm cogsmith/xtnode evalxtnode 2>/dev/null`
+    xtnodegit https://github.com/cogsmith/helloworld-xt
 ---
 
 # Minimal Example
