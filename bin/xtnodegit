@@ -1,0 +1,6 @@
+#!/bin/sh
+cd /app
+echo "$@"
+echo $0
+echo $1
+git clone "$@" .

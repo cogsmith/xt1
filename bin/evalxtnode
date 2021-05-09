@@ -2,10 +2,11 @@ xtnodecmd () {
     RUN_EP=$1; shift;
     RUN_NAME=${RUN_NAME:-"XTNODE_`date +%s`"};
     RUN_TYPE=${RUN_TYPE:-'--rm'};
+    MAPAPP=${MAPAPP:-$PWD};
     HOST=${HOST:-'127.0.0.1'};
     PORT=${PORT:-'80'};
     LOGLEVEL=${LOGLEVEL:-'debug'};
-    docker run -it --init $RUN_TYPE --name $RUN_NAME -v $PWD:/app --env LOGLEVEL=$LOGLEVEL --env HOST=0.0.0.0 --env PORT=9 -p $HOST:$PORT:9 --entrypoint $RUN_EP cogsmith/xtnode $@; 
+    docker run -it --init $RUN_TYPE --name $RUN_NAME -v $MAPAPP:/app --env LOGLEVEL=$LOGLEVEL --env HOST=0.0.0.0 --env PORT=9 -p $HOST:$PORT:9 --entrypoint $RUN_EP cogsmith/xtnode $@; 
     unset RUN_EP RUN_NAME;
 };
 
@@ -23,4 +24,4 @@ alias xtnodeuninstall='docker update --restart no';
 alias xtnodedebug='echo ; echo XTNODE=`xtnode version` ; echo HOST=$HOST ; echo PORT=$PORT ; echo ; LOGLEVEL=debug ; xtnode';
 alias xtnodetrace='echo ; echo XTNODE=`xtnode version` ; echo HOST=$HOST ; echo PORT=$PORT ; echo ; LOGLEVEL=trace ; xtnode';
 alias xtnodeversion='docker run --rm cogsmith/xtnode version';
-alias xtnodegit='xtnodecmd xtnodegit';
+alias xtnodegit='mkdir /tmp/null 2>/dev/null ; MAPAPP=/tmp/null ; xtnodecmd xtnodegit';
