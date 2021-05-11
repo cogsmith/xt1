@@ -1,5 +1,15 @@
 <code>
 
+# [1.0.155](https://github.com/cogsmith/xt/compare/1.0.155...main) @ [2021-05-11](https://github.com/cogsmith/xt/releases/tag/1.0.155) 
+
+## DIFF
+- [2 COMMITS SINCE LAST TAG = 1.0.154](https://github.com/cogsmith/xt/compare/1.0.154...1.0.155)
+
+</code>
+
+---
+<code>
+
 # [1.0.154](https://github.com/cogsmith/xt/compare/1.0.154...main) @ [2021-05-11](https://github.com/cogsmith/xt/releases/tag/1.0.154) 
 
 ## DIFF
