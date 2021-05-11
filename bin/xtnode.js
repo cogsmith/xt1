@@ -32,3 +32,4 @@ if (fs.existsSync('/app/app.js')) {
 else {
     console.log('# XTNODE_ERROR_NOAPP_MISSING_SCRIPT: app.js');
 }
+
