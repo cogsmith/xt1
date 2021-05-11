@@ -5,7 +5,7 @@ let args = process.argv;
 let nodebin = args.shift();
 let nodeapp = args.shift();
 
-console.log({ NODEBIN: nodebin, NODEAPP: nodeapp, ARGS: args });
+//console.log({ NODEBIN: nodebin, NODEAPP: nodeapp, ARGS: args });
 
 if (false) { }
 else if (args[0] == 'version' || args[1] == 'version') {
