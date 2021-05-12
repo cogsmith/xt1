@@ -3,4 +3,3 @@ cd /
 git clone "$@" /app
 cd /app
 node /bin/xtnode.js "$@"
-
