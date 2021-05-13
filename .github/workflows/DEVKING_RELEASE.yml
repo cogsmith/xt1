@@ -10,10 +10,11 @@ jobs:
   job:
     if: |
       github.event_name == 'workflow_dispatch'
-      || github.event.head_commit.message == 'TAG'
-      || github.event.head_commit.message == 'TAG PATCH'
-      || github.event.head_commit.message == 'TAG MINOR'
-      || github.event.head_commit.message == 'TAG MAJOR'
+      || ( github.event.head_commit.message == 'TAG'
+        || github.event.head_commit.message == 'TAG PATCH'
+        || github.event.head_commit.message == 'TAG MINOR'
+        || github.event.head_commit.message == 'TAG MAJOR'
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
