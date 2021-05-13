@@ -16,6 +16,7 @@ jobs:
         || github.event.head_commit.message == 'TAG PATCH'
         || github.event.head_commit.message == 'TAG MINOR'
         || github.event.head_commit.message == 'TAG MAJOR'
+        || startsWith(github.event.head_commit.message, 'TAG ')
       )
     runs-on: ubuntu-latest
     steps:
