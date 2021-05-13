@@ -23,6 +23,7 @@ ENV NODE_ENV=production
 #
 
 WORKDIR /
+RUN apk add git
 RUN npm config set update-notifier false 2> /dev/null
 RUN npm install --global nodemon pm2
 
