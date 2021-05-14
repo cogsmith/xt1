@@ -52,4 +52,4 @@ WORKDIR /app
 ENTRYPOINT ["/bin/xtnode"]
 CMD ["--loglevel trace","--logjson 0"]
 
-# 
+#
