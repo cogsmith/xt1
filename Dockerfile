@@ -51,5 +51,3 @@ ENV FORCE_COLOR=1
 WORKDIR /app
 ENTRYPOINT ["/bin/xtnode"]
 CMD ["--loglevel trace","--logjson 0"]
-
-#
