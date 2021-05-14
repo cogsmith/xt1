@@ -19,7 +19,7 @@ else if (args[0] == 'evalxtnode' || args[1] == 'evalxtnode') {
 }
 else if (args[0] == 'xtnodegit' || args[1] == 'xtnodegit') {
     let gitrepo = args[1]; if (args[1] == 'xtnodegit') { gitrepo = args[2]; }
-    let cmd = 'cd / ; git clone ' + gitrepo + ' /gitclone ; mkdir /app ; cp -a /gitclone/* /app ; ls -la /app ; cd /app ; npm install ; exit 0';
+    let cmd = 'cd / ; git clone ' + gitrepo + ' /git ; ls -la /git ; ls -la /app ; cd /app ; npm install ; exit 0';
     let cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout;
     console.log(cmd);
     console.log(cmdout);
