@@ -67,9 +67,11 @@ const App = XT.App;
 //
 
 XT.InitMeta = function () {
+    let STRIPEMOJI = function (z) { return z.replace(require('emoji-regex')(), '~~~~').replace(/( |)~~~~( |)/g, ''); };
+
     let xtpackagepath = './package.json';
     XT.Package = {}; try { XT.Package = require(xtpackagepath); } catch (ex) { console.log(ex); } // fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {}
-    XT.Meta = _.merge(XT.Package, { Info: XT.Package.description || '' });
+    XT.Meta = _.merge(XT.Package, { Info: STRIPEMOJI(XT.Package.description) || '' });
     XT.Meta.Version = XT.Package.version || process.env.npm_package_version || '0.0.0';
     XT.Meta.Name = XT.Package.namelong || XT.Package.name || 'XT';
     XT.Meta.NameTag = XT.Package.nametag || XT.Meta.Name.toUpperCase();
@@ -77,7 +79,7 @@ XT.InitMeta = function () {
 
     const AppPath = process.cwd();
     const AppPackage = fs.existsSync(AppPath + '/' + 'package.json') ? require(AppPath + '/' + 'package.json') : {};
-    const AppMeta = _.merge(AppPackage, { Info: AppPackage.description || '' });
+    const AppMeta = _.merge(AppPackage, { Info: STRIPEMOJI(AppPackage.description) || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
     AppMeta.Name = AppPackage.namelong || AppPackage.displayName || AppPackage.name || process.env.CELLTAG || nodepath.basename(AppPath).toUpperCase() || 'APP';
     AppMeta.NameTag = AppPackage.nametag || process.env.CELLTAG || AppPackage.Name || 'APP';
