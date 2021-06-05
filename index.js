@@ -325,6 +325,8 @@ App.Run = function () {
 
     process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
 
+    if (App.InitLog) { App.InitLog(); }
+
     if (App.InitArgs) {
         //LOG.TRACE('App.InitArgs');
         App.InitArgs();
