@@ -352,7 +352,7 @@ App.Run = function () {
     let appinfo = App.Info('App');
     if (appinfo != App.Meta.Full) {
         if (appinfo === appinfo.toLowerCase()) { appinfo = appinfo.toUpperCase(); }
-        LOG.INFO('App.Info: ' + chalk.white(App.Info('App')));
+        LOG.INFO('App.Info: ' + chalk.white(appinfo));
     }
 
     LOG.TRACE('App.Run');
