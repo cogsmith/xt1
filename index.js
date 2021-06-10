@@ -325,12 +325,12 @@ App.Run = function () {
 
     process.onSIGTERM = function () { LOG.WARN('App.Process: SIGTERM'); App.Exit(1); };
 
-    if (App.InitLog) { App.InitLog(); }
-
     if (App.InitArgs) {
         //LOG.TRACE('App.InitArgs');
         App.InitArgs();
     }
+
+    if (App.InitLog) { App.InitLog(); }
 
     if (App.InitInfo) {
         //LOG.TRACE('App.InitInfo');
@@ -348,7 +348,12 @@ App.Run = function () {
     LOG.TRACE('Node.Args: ' + chalk.white(App.Info('Node.Args')));
     LOG.DEBUG('XT.Init: ' + chalk.gray(XT.Meta.Full));
     LOG.INFO('App.Init: ' + chalk.white(App.Meta.Full));
-    let appinfo = App.Info('App'); if (appinfo != App.Meta.Full) { LOG.INFO('App.Info: ' + chalk.white(App.Info('App'))); }
+
+    let appinfo = App.Info('App');
+    if (appinfo != App.Meta.Full) {
+        if (appinfo === appinfo.toLowerCase()) { appinfo = appinfo.toUpperCase(); }
+        LOG.INFO('App.Info: ' + chalk.white(App.Info('App')));
+    }
 
     LOG.TRACE('App.Run');
 
