@@ -67,7 +67,7 @@ const App = XT.App;
 //
 
 XT.InitMeta = function () {
-    let STRIPEMOJI = function (z) { return z.replace(require('emoji-regex')(), '~~~~').replace(/( |)~~~~( |)/g, ''); };
+    let STRIPEMOJI = function (z) { if (!z) { return z; } else { return z.replace(require('emoji-regex')(), '~~~~').replace(/( |)~~~~( |)/g, ''); } };
 
     let xtpackagepath = './package.json';
     XT.Package = {}; try { XT.Package = require(xtpackagepath); } catch (ex) { console.log(ex); } // fs.existsSync(xtpackagepath) ? require(xtpackagepath) : {}
