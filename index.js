@@ -133,9 +133,13 @@ XT.Log.GetLogger = function () {
                 } else if (typeof (dat) == 'object') {
                 }
                 method.apply(this, [msg, dat]);
-                if (args.length == 2 || typeof (dat) == 'object') {
-                    let dump = nodeutil.inspect(dat, { colors: true, depth: null, breakLength: 50 });
-                    LOG.TRACE(msg + "\n" + dump);
+                if (typeof (dat) == 'object') {
+                    let dump = nodeutil.inspect(dat, { colors: true, depth: null, breakLength: 99 });
+                    // LOG.TRACE(msg + "\n" + dump);
+                    //method.apply(this, [msg]);
+                    if (Object.keys(dat || {}).length > 0) {
+                        console.log(dump);
+                    }
                 };
             }
         },
