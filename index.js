@@ -1,5 +1,6 @@
 const fs = require('fs');
 const nodepath = require('path');
+const nodeutil = require('util');
 const nodeos = require('os'); if (!nodeos.version) { nodeos.version = function () { return 0; } }
 
 const util = require('util');
@@ -20,13 +21,14 @@ const fastify_pov = require('point-of-view');
 //
 
 const NOP = function () { };
-let LOG = NOP; LOG.FATAL = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP;
-const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE; LOG = LOGCONSOLE;
+let LOG = NOP; LOG.FATAL = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP; LOG.DUMP = NOP;
+const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE; LOG = LOGCONSOLE; LOG.DUMP = console.dir;
 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
     .group('loglevel', 'Log').describe('loglevel', 'Log Level').default('loglevel', process.env.LOGLEVEL || 'debug')
     .group('logjson', 'Log').describe('logjson', 'Log JSON').default('logjson', process.env.LOGJSON || false)
+    .group('ui', 'UI').describe('ui', 'Terminal Interface').default('ui', true && process.stdin.isTTY)
     .group('bindip', 'Backend').describe('bindip', 'Backend Bind IP').default('bindip', process.env.HOST || '127.0.0.1')
     .group('bindport', 'Backend').describe('bindport', 'Backend Bind Port').default('bindport', process.env.PORT || 80);
 const YARGS = YARGY.argv;
@@ -123,8 +125,18 @@ XT.Log.GetLogger = function () {
         prettyPrint: (YARGS.logjson == 1) ? false : XT.Log.Pretty,
         hooks: {
             logMethod: function (args, method) {
-                if (args.length === 2) { args.reverse() }
-                method.apply(this, args);
+                let msg = args[0];
+                let dat = args[1] || null;
+                if (typeof (dat) == 'number') {
+                    msg = msg + ': ' + dat;
+                    dat = null;
+                } else if (typeof (dat) == 'object') {
+                }
+                method.apply(this, [msg, dat]);
+                if (args.length === 2) {
+                    let dump = nodeutil.inspect(args[0], { colors: true, depth: null, breakLength: 1 });
+                    LOG.TRACE(args[1] + "\n" + dump);
+                };
             }
         },
     });
@@ -342,6 +354,11 @@ App.Run = function () {
     if (App.Args.debugargs) { console.log("\n"); console.log(App.Args); console.log("\n"); App.ExitSilent(); }
     if (App.Args.help) { App.Argy.showHelp('log'); console.log("\n" + App.Info('Node') + "\n"); App.ExitSilent(); }
     if (App.Args.version) { console.log(App.Meta.Version); App.ExitSilent(); }
+
+    if (App.InitTUI) {
+        LOG.TRACE('App.InitTUI');
+        App.InitTUI();
+    }
 
     //LOG.TRACE({ App: App });
     LOG.TRACE('Node.Info: ' + chalk.gray(App.Info('Node')));
