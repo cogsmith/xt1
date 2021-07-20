@@ -21,8 +21,8 @@ const fastify_pov = require('point-of-view');
 //
 
 const NOP = function () { };
-let LOG = NOP; LOG.FATAL = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP; LOG.DUMP = NOP;
-const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE; LOG = LOGCONSOLE; LOG.DUMP = console.dir;
+let LOG = NOP; LOG.FATAL = NOP; LOG.TRACE = NOP; LOG.DEBUG = NOP; LOG.INFO = NOP; LOG.WARN = NOP; LOG.ERROR = NOP; LOG.DIR = NOP;
+const LOGCONSOLE = console.log; LOG.TRACE = LOGCONSOLE; LOG.DEBUG = LOGCONSOLE; LOG.INFO = LOGCONSOLE; LOG.WARN = LOGCONSOLE; LOG.ERROR = LOGCONSOLE; LOG = LOGCONSOLE; LOG.DIR = console.dir;
 
 const YARGY = yargs(process.argv).help(false).version(false)
     .usage("\n" + 'USAGE: node $0 [options]')
@@ -133,9 +133,9 @@ XT.Log.GetLogger = function () {
                 } else if (typeof (dat) == 'object') {
                 }
                 method.apply(this, [msg, dat]);
-                if (args.length === 2) {
-                    let dump = nodeutil.inspect(args[0], { colors: true, depth: null, breakLength: 1 });
-                    LOG.TRACE(args[1] + "\n" + dump);
+                if (args.length == 2 || typeof (dat) == 'object') {
+                    let dump = nodeutil.inspect(dat, { colors: true, depth: null, breakLength: 50 });
+                    LOG.TRACE(msg + "\n" + dump);
                 };
             }
         },
