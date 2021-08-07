@@ -181,6 +181,34 @@ XT.InitApp = function () {
 
 //
 
+XT.Data = {};
+
+XT.Data.TimeMS = {};
+XT.Data.TimeMS.Second = 1000;
+XT.Data.TimeMS.Minute = 1000 * 60;
+XT.Data.TimeMS.Hour = 1000 * 60 * 60;
+XT.Data.TimeMS.Day = 1000 * 60 * 60 * 24;
+XT.Data.TimeMS.Week = 1000 * 60 * 60 * 24 * 7;
+XT.Data.TimeMS.Year = 1000 * 60 * 60 * 24 * 365;
+
+XT.Data.Humanize = {};
+
+XT.Data.Humanize.TimeMS = function (ms) {
+    let ams = Math.abs(ms);
+    let z = ams;
+    let str = 0;
+    let unit = 'ms';
+    if (ams < 100) { }
+    else if (ams >= 100 && ams < XT.Data.TimeMS.Minute) { z = ams / XT.Data.TimeMS.Second; unit = 's'; }
+    else if (ams >= XT.Data.TimeMS.Minute && ams < XT.Data.TimeMS.Hour) { z = ams / XT.Data.TimeMS.Minute; unit = 'm'; }
+    else if (ams >= XT.Data.TimeMS.Hour && ams < XT.Data.TimeMS.Day) { z = ams / XT.Data.TimeMS.Hour; unit = 'h'; }
+    else if (ams >= XT.Data.TimeMS.Day) { z = ams / XT.Data.TimeMS.Day; unit = 'd'; }
+    if (unit == 'ms') { str = z + ' ' + unit; } else { str = z.toFixed(2) + ' ' + unit; }
+    return str;
+}
+
+//
+
 App.Exit = function (z, data) {
     let exit = { code: 0, error: false, silent: false, message: 'App.Exit' };
     if (z && z.stack) {
