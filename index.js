@@ -213,7 +213,12 @@ XT.Object = {};
 
 XT.Object.List = function (o) {
     let list = [];
-    for (let k in o) { o.ID = k; list.push(o[k]); }
+    for (let k in o) {
+        let oo = o[k];
+        if (typeof oo != 'object') { oo = { Value: oo }; }
+        oo.ID = k;
+        list.push(oo);
+    }
     return list;
 }
 
