@@ -191,9 +191,9 @@ XT.Data.TimeMS.Day = 1000 * 60 * 60 * 24;
 XT.Data.TimeMS.Week = 1000 * 60 * 60 * 24 * 7;
 XT.Data.TimeMS.Year = 1000 * 60 * 60 * 24 * 365;
 
-XT.Data.Humanize = {};
+XT.Humanize = {};
 
-XT.Data.Humanize.TimeMS = function (ms) {
+XT.Humanize.TimeMS = function (ms) {
     let ams = Math.abs(ms);
     let z = ams;
     let str = 0;
@@ -205,6 +205,16 @@ XT.Data.Humanize.TimeMS = function (ms) {
     else if (ams >= XT.Data.TimeMS.Day) { z = ams / XT.Data.TimeMS.Day; unit = 'd'; }
     if (unit == 'ms') { str = z + ' ' + unit; } else { str = z.toFixed(2) + ' ' + unit; }
     return str;
+}
+
+//
+
+XT.Object = {};
+
+XT.Object.List = function (o) {
+    let list = [];
+    for (let k in o) { o.ID = k; list.push(o[k]); }
+    return list;
 }
 
 //
