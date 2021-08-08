@@ -69,7 +69,7 @@ const App = XT.App;
 //
 
 XT.InitMeta = function () {
-    console.log("\n" + require.main + "\n");
+    console.log(); console.log(require.main); console.log({ CWD: process.cwd(), DIRNAME: __dirname }); console.log();
 
     let STRIPEMOJI = function (z) { if (!z) { return z; } else { return z.replace(require('emoji-regex')(), '~~~~').replace(/( |)~~~~( |)/g, ''); } };
 
