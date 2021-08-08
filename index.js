@@ -81,7 +81,7 @@ XT.InitMeta = function () {
     XT.Meta.NameTag = XT.Package.nametag || XT.Meta.Name.toUpperCase();
     XT.Meta.Full = XT.Meta.Name + (XT.Meta.Info ? ': ' + XT.Meta.Info + ' ' : ' ') + '[' + XT.Meta.Version + ']';
 
-    const AppPath = process.cwd();
+    const AppPath = require.main.path; // process.cwd();
     const AppPackage = fs.existsSync(AppPath + '/' + 'package.json') ? require(AppPath + '/' + 'package.json') : {};
     const AppMeta = _.merge(AppPackage, { Info: STRIPEMOJI(AppPackage.description) || '' });
     AppMeta.Version = AppPackage.version || process.env.npm_package_version || '0.0.0';
