@@ -413,6 +413,10 @@ App.Run = function () {
     LOG.DEBUG('XT.Init: ' + chalk.gray(XT.Meta.Full));
     LOG.INFO('App.Init: ' + chalk.white(App.Meta.Full));
 
+    LOG.WARN('', { PCWD: process.cwd(), DIRNAME: __dirname });
+    LOG.WARN(XT.Meta.Full);
+    LOG.WARN(App.Meta.Full);
+
     let appinfo = App.Info('App');
     if (appinfo != App.Meta.Full) {
         if (appinfo === appinfo.toLowerCase()) { appinfo = appinfo.toUpperCase(); }
