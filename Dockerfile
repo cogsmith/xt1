@@ -28,7 +28,7 @@ RUN npm config set update-notifier false 2> /dev/null
 RUN npm install --global nodemon pm2
 
 WORKDIR /xtnpm
-RUN echo -e "#\n#" ; echo 20210808_022633 ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
+RUN echo -e "#\n#" ; echo [=DT=] ; echo `date` ; echo -e "#\n#" ; npm install @cogsmith/xt ; echo -e "#\n#" ; cp -a node_modules / ; npm list --depth=0 ; echo -e "#\n#" ; ls -laR /node_modules/@cogsmith ; echo -e "#\n#"
 
 WORKDIR /xtlib
 COPY ["package.json","package-lock.json*","./"]
