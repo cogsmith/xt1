@@ -211,28 +211,43 @@ XT.Humanize.TimeMS = function (ms) {
 
 //
 
+XT.Buffer = function (id) {
+    if (!id) { id = 0; }
+    let buf = XT.Buffer.DB[id];
+    buf = buf.substr(0, buf.lenth - 2);
+    return buf;
+}
+
+XT.Buffer.DB = {};
+XT.Buffer.Get = function (id) { return XT.Buffer.DB[id]; };
+XT.Buffer.Reset = function (id) { XT.Buffer.DB[id] = ''; };
+XT.Buffer.Append = function (id, dat) {
+    if (!dat) { dat = id; id = 0; };
+    if (!XT.Buffer.DB[id]) { XT.Buffer.DB[id] = ''; }
+    XT.Buffer.DB[id] += dat;
+}
+
 XT.Stream = {};
-XT.Stream.Buffer = '';
 
 XT.Stream.Restore = function (s) {
     s.write = s.writebind;
-    delete s.writebind;
+    //delete s.writebind;
 }
 
 XT.Stream.SaveAndMute = function (s) {
-    this.Buffer = '';
+    XT.Buffer.Reset(s);
     s.writebind = s.write.bind(s);
     s.write = function (dat, enc, nxt) {
-        this.Buffer += s;
-        //return s.writebind.apply(this, arguments); 
+        XT.Buffer.Append(dat);
+        //return s.writebind.apply(this, arguments);
     }
 }
 
 XT.Stream.SaveAndPipe = function (s) {
-    this.Buffer = '';
+    XT.Buffer.Reset();
     s.writebind = s.write.bind(s);
     s.write = function (dat, enc, nxt) {
-        this.Buffer += s;
+        XT.Buffer.Append(dat);
         return s.writebind.apply(this, arguments);
     }
 }
