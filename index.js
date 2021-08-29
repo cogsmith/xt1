@@ -211,6 +211,34 @@ XT.Humanize.TimeMS = function (ms) {
 
 //
 
+XT.Stream = {};
+XT.Stream.Buffer = '';
+
+XT.Stream.Restore = function (s) {
+    s.write = s.writebind;
+    delete s.writebind;
+}
+
+XT.Stream.SaveAndMute = function (s) {
+    this.Buffer = '';
+    s.writebind = s.write.bind(s);
+    s.write = function (dat, enc, nxt) {
+        this.Buffer += s;
+        //return s.writebind.apply(this, arguments); 
+    }
+}
+
+XT.Stream.SaveAndPipe = function (s) {
+    this.Buffer = '';
+    s.writebind = s.write.bind(s);
+    s.write = function (dat, enc, nxt) {
+        this.Buffer += s;
+        return s.writebind.apply(this, arguments);
+    }
+}
+
+//
+
 XT.Object = {};
 
 XT.Object.List = function (o) {
