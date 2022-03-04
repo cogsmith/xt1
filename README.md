@@ -34,6 +34,22 @@
 
 ---
 
+![XTDOOM](XTDOOM.PNG)
+
+# XT Secret Sauce: Ingredients BOM:
+
+* 🙊 [REDACTED] 
+* 💦 99% perspiration
+* 🚧 constant evolution
+* 🐳 a few npx docker tricks
+* 🍅 several tall glasses of V8
+* ⚔️ battletested best practices
+* 🛠️ countless ecmatastic plumbing hacks
+* 🍰 near-excessive amounts of syntactic sugar
+* 🦄 ... and 1 velociraptor riding unicorn 🦖
+
+---
+
 # Code Sandbox
 
 # https://xtdemo.cogsmith.com
