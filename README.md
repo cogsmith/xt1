@@ -36,6 +36,8 @@
 
 ![XTDOOM](XTDOOM.PNG)
 
+---
+
 # XT Secret Sauce: Ingredients BOM:
 
 * 🙊 [REDACTED] 
@@ -43,10 +45,10 @@
 * 🚧 constant evolution
 * 🐳 a few npx docker tricks
 * 🍅 several tall glasses of V8
-* ⚔️ battletested best practices
+* ⚔️ battle-tested best practices
 * 🛠️ countless ecmatastic plumbing hacks
 * 🍰 near-excessive amounts of syntactic sugar
-* 🦄 ... and 1 velociraptor riding unicorn 🦖
+* 🦖 ... and 1 velociraptor riding unicorn 🦄
 
 ---
 
