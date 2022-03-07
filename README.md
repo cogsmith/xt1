@@ -43,7 +43,6 @@
 * 🙊 [REDACTED] 
 * 💦 99% perspiration
 * 🚧 constant evolution
-* 🐳 a few npx docker tricks
 * 🍅 several tall glasses of V8
 * 🛠️ countless ecmatastic plumbing hacks
 * ⚔️ decades of battle-tested best practices
